@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace service
+namespace BusinessObject.DTO
 {
-    public interface IPropertyService
+    internal class UpdateStatusPropertyRequest
     {
-
     }
 }
