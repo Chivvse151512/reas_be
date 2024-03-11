@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Document\\CN8\\PRN231\\project\\reas\\repository\\repository.csproj": {}
+    "/Users/truonghoang/Desktop/PRN231/reas_be/repository/repository.csproj": {}
   },
   "projects": {
-    "D:\\Document\\CN8\\PRN231\\project\\reas\\BusinessObject\\BusinessObject.csproj": {
+    "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Document\\CN8\\PRN231\\project\\reas\\BusinessObject\\BusinessObject.csproj",
+        "projectUniqueName": "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj",
         "projectName": "BusinessObject",
-        "projectPath": "D:\\Document\\CN8\\PRN231\\project\\reas\\BusinessObject\\BusinessObject.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\Document\\CN8\\PRN231\\project\\reas\\BusinessObject\\obj\\",
+        "projectPath": "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj",
+        "packagesPath": "/Users/truonghoang/.nuget/packages/",
+        "outputPath": "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/truonghoang/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -81,36 +79,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.313/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Document\\CN8\\PRN231\\project\\reas\\DAO\\DAO.csproj": {
+    "/Users/truonghoang/Desktop/PRN231/reas_be/DAO/DAO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Document\\CN8\\PRN231\\project\\reas\\DAO\\DAO.csproj",
+        "projectUniqueName": "/Users/truonghoang/Desktop/PRN231/reas_be/DAO/DAO.csproj",
         "projectName": "DAO",
-        "projectPath": "D:\\Document\\CN8\\PRN231\\project\\reas\\DAO\\DAO.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\Document\\CN8\\PRN231\\project\\reas\\DAO\\obj\\",
+        "projectPath": "/Users/truonghoang/Desktop/PRN231/reas_be/DAO/DAO.csproj",
+        "packagesPath": "/Users/truonghoang/.nuget/packages/",
+        "outputPath": "/Users/truonghoang/Desktop/PRN231/reas_be/DAO/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/truonghoang/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Document\\CN8\\PRN231\\project\\reas\\BusinessObject\\BusinessObject.csproj": {
-                "projectPath": "D:\\Document\\CN8\\PRN231\\project\\reas\\BusinessObject\\BusinessObject.csproj"
+              "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj": {
+                "projectPath": "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj"
               }
             }
           }
@@ -140,39 +136,37 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.313/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Document\\CN8\\PRN231\\project\\reas\\repository\\repository.csproj": {
+    "/Users/truonghoang/Desktop/PRN231/reas_be/repository/repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Document\\CN8\\PRN231\\project\\reas\\repository\\repository.csproj",
+        "projectUniqueName": "/Users/truonghoang/Desktop/PRN231/reas_be/repository/repository.csproj",
         "projectName": "repository",
-        "projectPath": "D:\\Document\\CN8\\PRN231\\project\\reas\\repository\\repository.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\Document\\CN8\\PRN231\\project\\reas\\repository\\obj\\",
+        "projectPath": "/Users/truonghoang/Desktop/PRN231/reas_be/repository/repository.csproj",
+        "packagesPath": "/Users/truonghoang/.nuget/packages/",
+        "outputPath": "/Users/truonghoang/Desktop/PRN231/reas_be/repository/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/truonghoang/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Document\\CN8\\PRN231\\project\\reas\\BusinessObject\\BusinessObject.csproj": {
-                "projectPath": "D:\\Document\\CN8\\PRN231\\project\\reas\\BusinessObject\\BusinessObject.csproj"
+              "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj": {
+                "projectPath": "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj"
               },
-              "D:\\Document\\CN8\\PRN231\\project\\reas\\DAO\\DAO.csproj": {
-                "projectPath": "D:\\Document\\CN8\\PRN231\\project\\reas\\DAO\\DAO.csproj"
+              "/Users/truonghoang/Desktop/PRN231/reas_be/DAO/DAO.csproj": {
+                "projectPath": "/Users/truonghoang/Desktop/PRN231/reas_be/DAO/DAO.csproj"
               }
             }
           }
@@ -202,7 +196,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.313/RuntimeIdentifierGraph.json"
         }
       }
     }
