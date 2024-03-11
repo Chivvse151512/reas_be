@@ -1,12 +1,44 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessObject;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace reas.Controllers
 {
-    public class PropertyController : Controller
+    [Route("api/property")]
+    [ApiController]
+    public class PropertyController : ControllerBase
     {
-        public IActionResult Index()
+        [HttpGet()]
+        public IEnumerable<Property> Get()
         {
-            return View();
+            return null;
         }
+
+        [HttpPost()]
+        public IEnumerable<Property> create()
+        {
+            return null;
+        }
+
+        [HttpPost("update-property")]
+        public IEnumerable<Property> update()
+        {
+            return null;
+        }
+
+        [HttpPost("update-status")]
+        public IEnumerable<Property> updateStatus()
+        {
+            return null;
+        }
+
+        [HttpPost("update-price")]
+        public IEnumerable<Property> updateCurrentPrice()
+        {
+            return null;
+        }
+
+
+
     }
 }

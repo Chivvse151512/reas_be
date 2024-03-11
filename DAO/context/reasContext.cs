@@ -6,13 +6,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace BusinessObject
 {
-    public partial class reasContext : DbContext
+    public partial class ReasContext : DbContext
     {
-        public reasContext()
+        public ReasContext()
         {
         }
 
-        public reasContext(DbContextOptions<reasContext> options)
+        public ReasContext(DbContextOptions<ReasContext> options)
             : base(options)
         {
         }
