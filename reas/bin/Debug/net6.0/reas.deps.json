@@ -11,7 +11,7 @@
           "BusinessObject": "1.0.0",
           "Swashbuckle.AspNetCore": "6.5.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.24",
-          "Microsoft.AspNetCore.OData": "8.2.4",
+          "Microsoft.AspNetCore.OData": "8.2.5",
           "Microsoft.Extensions.Configuration": "8.0.0",
           "service": "1.0.0"
         },
@@ -30,7 +30,7 @@
           }
         }
       },
-      "Microsoft.AspNetCore.OData/8.2.4": {
+      "Microsoft.AspNetCore.OData/8.2.5": {
         "dependencies": {
           "Microsoft.OData.Core": "7.20.0",
           "Microsoft.OData.Edm": "7.20.0",
@@ -39,8 +39,8 @@
         },
         "runtime": {
           "lib/net6.0/Microsoft.AspNetCore.OData.dll": {
-            "assemblyVersion": "8.2.4.0",
-            "fileVersion": "8.2.4.50116"
+            "assemblyVersion": "8.2.5.0",
+            "fileVersion": "8.2.5.50301"
           }
         }
       },
@@ -92,22 +92,22 @@
           "runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-arm",
             "assetType": "native",
-            "fileVersion": "2.1.1.0"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "2.1.1.0"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "2.1.1.0"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "2.1.1.0"
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -668,12 +668,12 @@
       "path": "microsoft.aspnetcore.authentication.jwtbearer/6.0.24",
       "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.6.0.24.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.OData/8.2.4": {
+    "Microsoft.AspNetCore.OData/8.2.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-QT8ArspLImFhBDrezsS+06gbC1HHkJVsiZbEsJ65y1gqAnG+fyHqXvealvbinX9Rfy/fpatOK+x6DMLy4mcQSQ==",
-      "path": "microsoft.aspnetcore.odata/8.2.4",
-      "hashPath": "microsoft.aspnetcore.odata.8.2.4.nupkg.sha512"
+      "sha512": "sha512-zAgHw+d/wZjuN2AjmYw8+O6y8Bi7s2L5E/unRz1PTsaJ1z8UWrdh/vAReIwlxnSXYBUCAaQMKQPERqKGe+8uGw==",
+      "path": "microsoft.aspnetcore.odata/8.2.5",
+      "hashPath": "microsoft.aspnetcore.odata.8.2.5.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
       "type": "package",

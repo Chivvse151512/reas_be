@@ -12,10 +12,7 @@ namespace DAO
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new DepositDao();
-                }
+                instance ??= new DepositDao();
 
                 return instance;
             }
@@ -73,6 +70,7 @@ namespace DAO
                 return null;
             }
         }
+
         public Deposit? UpdateStatus(int depositId, int newStatus)
         {
             try
@@ -123,6 +121,21 @@ namespace DAO
             catch (Exception e)
             {
                 Console.WriteLine("Error when getting deposit by ID: " + e);
+                return null;
+            }
+        }
+
+        public bool? CheckDeposit(int userId, int propertyId)
+        {
+            try
+            {
+                bool depositExists = context?.Deposits.Any(d => d.UserId == userId && d.PropertyId == propertyId) ?? false;
+
+                return depositExists;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error when checking deposit: " + e);
                 return null;
             }
         }
