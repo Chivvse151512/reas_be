@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessObject;
+﻿using BusinessObject;
 using Microsoft.AspNetCore.Mvc;
 using service;
 
@@ -63,6 +59,30 @@ namespace reas.Controllers
                 return StatusCode(500, $"An error occurred while updating deposit with ID: {id}.");
             }
             return Ok(updatedDeposit);
+        }
+        [HttpGet("check")]
+        public ActionResult CheckDeposit([FromQuery] int userId, [FromQuery] int propertyId)
+        {
+            try
+            {
+                var depositExists = _depositService.CheckDeposit(userId, propertyId);
+                if (depositExists.HasValue && depositExists.Value)
+                {
+                    return Ok(new { message = "Deposit exists." });
+                }
+                else if (depositExists.HasValue && !depositExists.Value)
+                {
+                    return Ok(new { message = "Deposit does not exist." });
+                }
+                else
+                {
+                    return StatusCode(500, "An error occurred while checking deposit existence.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An unexpected error occurred: {ex.Message}");
+            }
         }
     }
 }

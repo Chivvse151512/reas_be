@@ -13,10 +13,7 @@ namespace DAO
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new BidDao();
-                }
+                instance ??= new BidDao();
 
                 return instance;
             }
