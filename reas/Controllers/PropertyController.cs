@@ -35,6 +35,7 @@ namespace reas.Controllers
         }
 
         [HttpPost]
+
         public IActionResult create([FromBody] CreatePropertyRequest request)
         {
             try

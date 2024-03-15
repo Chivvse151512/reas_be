@@ -8,11 +8,15 @@ namespace BusinessObject.DTO
 {
     public class Message
     {
-        public string message { get; set; }
+        private string message;
+        private Message(string message)
+        {
+            this.message = message;
+        }
 
         public static Message of(string message)
         {
-            return new Message { message = message };
-        }  
+            return new Message(message);
+        }
     }
 }

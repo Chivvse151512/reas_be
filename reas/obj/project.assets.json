@@ -21,7 +21,7 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "Microsoft.AspNetCore.OData/8.2.4": {
+      "Microsoft.AspNetCore.OData/8.2.5": {
         "type": "package",
         "dependencies": {
           "Microsoft.OData.Core": "[7.20.0, 8.0.0)",
@@ -1195,10 +1195,10 @@
         "microsoft.aspnetcore.authentication.jwtbearer.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.OData/8.2.4": {
-      "sha512": "QT8ArspLImFhBDrezsS+06gbC1HHkJVsiZbEsJ65y1gqAnG+fyHqXvealvbinX9Rfy/fpatOK+x6DMLy4mcQSQ==",
+    "Microsoft.AspNetCore.OData/8.2.5": {
+      "sha512": "zAgHw+d/wZjuN2AjmYw8+O6y8Bi7s2L5E/unRz1PTsaJ1z8UWrdh/vAReIwlxnSXYBUCAaQMKQPERqKGe+8uGw==",
       "type": "package",
-      "path": "microsoft.aspnetcore.odata/8.2.4",
+      "path": "microsoft.aspnetcore.odata/8.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1209,7 +1209,7 @@
         "lib/net6.0/Microsoft.AspNetCore.OData.xml",
         "lib/netcoreapp3.1/Microsoft.AspNetCore.OData.dll",
         "lib/netcoreapp3.1/Microsoft.AspNetCore.OData.xml",
-        "microsoft.aspnetcore.odata.8.2.4.nupkg.sha512",
+        "microsoft.aspnetcore.odata.8.2.5.nupkg.sha512",
         "microsoft.aspnetcore.odata.nuspec"
       ]
     },
@@ -3169,42 +3169,43 @@
       "BusinessObject >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0",
       "microsoft.aspnetcore.authentication.jwtbearer >= 6.0.24",
-      "microsoft.aspnetcore.odata >= 8.2.4",
+      "microsoft.aspnetcore.odata >= 8.2.5",
       "microsoft.extensions.configuration >= 8.0.0",
       "service >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "/Users/truonghoang/.nuget/packages/": {}
+    "C:\\Users\\ASUS\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/truonghoang/Desktop/PRN231/reas_be/reas/reas.csproj",
+      "projectUniqueName": "D:\\Document\\CN8\\PRN231\\project\\reas\\reas\\reas.csproj",
       "projectName": "reas",
-      "projectPath": "/Users/truonghoang/Desktop/PRN231/reas_be/reas/reas.csproj",
-      "packagesPath": "/Users/truonghoang/.nuget/packages/",
-      "outputPath": "/Users/truonghoang/Desktop/PRN231/reas_be/reas/obj/",
+      "projectPath": "D:\\Document\\CN8\\PRN231\\project\\reas\\reas\\reas.csproj",
+      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+      "outputPath": "D:\\Document\\CN8\\PRN231\\project\\reas\\reas\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/truonghoang/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/sdk/7.0.313/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj": {
-              "projectPath": "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj"
+            "D:\\Document\\CN8\\PRN231\\project\\reas\\BusinessObject\\BusinessObject.csproj": {
+              "projectPath": "D:\\Document\\CN8\\PRN231\\project\\reas\\BusinessObject\\BusinessObject.csproj"
             },
-            "/Users/truonghoang/Desktop/PRN231/reas_be/service/service.csproj": {
-              "projectPath": "/Users/truonghoang/Desktop/PRN231/reas_be/service/service.csproj"
+            "D:\\Document\\CN8\\PRN231\\project\\reas\\service\\service.csproj": {
+              "projectPath": "D:\\Document\\CN8\\PRN231\\project\\reas\\service\\service.csproj"
             }
           }
         }
@@ -3229,7 +3230,7 @@
           },
           "microsoft.aspnetcore.odata": {
             "target": "Package",
-            "version": "[8.2.4, )"
+            "version": "[8.2.5, )"
           },
           "microsoft.extensions.configuration": {
             "target": "Package",
@@ -3255,7 +3256,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.313/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
