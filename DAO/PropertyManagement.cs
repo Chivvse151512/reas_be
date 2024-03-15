@@ -1,4 +1,5 @@
 ﻿using BusinessObject;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace DAO
 {
     public class PropertyManagement
     {
-        ReasContext context = new ReasContext();
+        private readonly ReasContext? context;
         private static PropertyManagement instance = null;
         public static PropertyManagement Instance
         {
@@ -24,7 +25,20 @@ namespace DAO
             }
         }
 
-        private PropertyManagement() { }
+        private PropertyManagement()
+        {
+            if (context == null)
+            {
+                try
+                {
+                    context = new ReasContext();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Cannot connect to the database: {ex.Message}");
+                }
+            }
+        }
 
 
 
