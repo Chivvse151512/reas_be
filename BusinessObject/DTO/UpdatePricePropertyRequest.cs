@@ -8,6 +8,7 @@ namespace BusinessObject.DTO
 {
     public class UpdatePricePropertyRequest
     {
-
+        public int Id { get; set; }
+        public int Price { get; set; }
     }
 }

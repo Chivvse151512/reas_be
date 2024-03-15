@@ -1,6 +1,9 @@
 ﻿using BusinessObject;
+using BusinessObject.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
+using service;
 
 namespace reas.Controllers
 {
@@ -8,34 +11,80 @@ namespace reas.Controllers
     [ApiController]
     public class PropertyController : ControllerBase
     {
-        [HttpGet()]
-        public IEnumerable<Property> Get()
+
+        private IPropertyService propertyService;
+        public PropertyController(IPropertyService propertyService)
         {
-            return null;
+            this.propertyService = propertyService;
         }
 
-        [HttpPost()]
-        public IEnumerable<Property> create()
+
+        [HttpGet]
+        [EnableQuery]
+        public IActionResult Get()
         {
-            return null;
+            try
+            {
+                List<Property> properties =  propertyService.get().ToList();
+                return Ok(properties);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Message.of(ex.Message));
+            }
+        }
+
+        [HttpPost]
+        public IActionResult create([FromBody] CreatePropertyRequest request)
+        {
+            try
+            {
+                propertyService.create(request);
+                return Ok();
+
+
+            } catch (Exception ex)
+            {
+                return BadRequest(Message.of(ex.Message));
+            }
         }
 
         [HttpPost("update-property")]
-        public IEnumerable<Property> update()
+        public IActionResult update()
         {
             return null;
         }
 
         [HttpPost("update-status")]
-        public IEnumerable<Property> updateStatus()
+        public IActionResult updateStatus(UpdateStatusPropertyRequest request)
         {
-            return null;
+            try
+            {
+                propertyService.updateStatus(request);
+                return Ok();
+
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Message.of(ex.Message));
+            }
         }
 
         [HttpPost("update-price")]
-        public IEnumerable<Property> updateCurrentPrice()
+        public IActionResult updateCurrentPrice(UpdatePricePropertyRequest request)
         {
-            return null;
+            try
+            {
+                propertyService.updatePrice(request);
+                return Ok();
+
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Message.of(ex.Message));
+            }
         }
 
 

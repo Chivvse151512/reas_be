@@ -190,6 +190,18 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
+            },
+            "microsoft.aspnetcore.authentication.jwtbearer": {
+              "target": "Package",
+              "version": "[6.0.24, )"
+            },
+            "microsoft.aspnetcore.odata": {
+              "target": "Package",
+              "version": "[8.2.4, )"
+            },
+            "microsoft.extensions.configuration": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [

@@ -11,8 +11,7 @@ namespace repository
     {
         IEnumerable<Property> get();
         Property get(int id);
-
-        bool created(Property property);
+        bool create(Property property);
         bool update(Property property);
         bool delete(Property property);
     }

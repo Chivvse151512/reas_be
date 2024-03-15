@@ -72,3 +72,13 @@ D:\Document\CN8\PRN231\project\reas\reas\obj\Debug\net6.0\refint\reas.dll
 D:\Document\CN8\PRN231\project\reas\reas\obj\Debug\net6.0\reas.pdb
 D:\Document\CN8\PRN231\project\reas\reas\obj\Debug\net6.0\reas.genruntimeconfig.cache
 D:\Document\CN8\PRN231\project\reas\reas\obj\Debug\net6.0\ref\reas.dll
+D:\Document\CN8\PRN231\project\reas\reas\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Document\CN8\PRN231\project\reas\reas\bin\Debug\net6.0\Microsoft.AspNetCore.OData.dll
+D:\Document\CN8\PRN231\project\reas\reas\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Document\CN8\PRN231\project\reas\reas\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+D:\Document\CN8\PRN231\project\reas\reas\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Document\CN8\PRN231\project\reas\reas\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+D:\Document\CN8\PRN231\project\reas\reas\bin\Debug\net6.0\Microsoft.OData.Core.dll
+D:\Document\CN8\PRN231\project\reas\reas\bin\Debug\net6.0\Microsoft.OData.Edm.dll
+D:\Document\CN8\PRN231\project\reas\reas\bin\Debug\net6.0\Microsoft.OData.ModelBuilder.dll
+D:\Document\CN8\PRN231\project\reas\reas\bin\Debug\net6.0\Microsoft.Spatial.dll

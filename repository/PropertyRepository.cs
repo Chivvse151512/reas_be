@@ -22,7 +22,7 @@ namespace repository
             return propertyManagement.get(id);
         }
 
-        public bool created(Property property)
+        public bool create(Property property)
         {
             return propertyManagement.create(property);
         }

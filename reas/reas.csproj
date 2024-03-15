@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="microsoft.aspnetcore.authentication.jwtbearer" Version="6.0.24" />
+    <PackageReference Include="microsoft.aspnetcore.odata" Version="8.2.4" />
+    <PackageReference Include="microsoft.extensions.configuration" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 

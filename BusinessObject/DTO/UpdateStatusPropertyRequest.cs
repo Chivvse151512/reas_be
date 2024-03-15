@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace BusinessObject.DTO
 {
-    internal class UpdateStatusPropertyRequest
+    public class UpdateStatusPropertyRequest
     {
+        public int Id { get; set; }
+        public int Status {  get; set; }
+
     }
 }
