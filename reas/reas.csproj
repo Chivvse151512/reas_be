@@ -7,9 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bogus" Version="35.5.0" />
+    <PackageReference Include="MailKit" Version="4.4.0" />
     <PackageReference Include="microsoft.aspnetcore.authentication.jwtbearer" Version="6.0.24" />
     <PackageReference Include="microsoft.aspnetcore.odata" Version="8.2.5" />
     <PackageReference Include="microsoft.extensions.configuration" Version="8.0.0" />
+    <PackageReference Include="MimeKit" Version="4.4.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 

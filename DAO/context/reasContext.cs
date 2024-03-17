@@ -53,7 +53,7 @@ namespace BusinessObject
             {
                 entity.ToTable("Bid");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                //entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Amount).HasColumnType("money");
 
@@ -78,7 +78,7 @@ namespace BusinessObject
             {
                 entity.ToTable("Deposit");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                //entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Amount).HasColumnType("money");
 
@@ -95,7 +95,7 @@ namespace BusinessObject
 
             modelBuilder.Entity<News>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                //entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Author)
                     .HasMaxLength(100)
@@ -120,7 +120,7 @@ namespace BusinessObject
             {
                 entity.ToTable("Property");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                //entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Address).HasMaxLength(255);
 
@@ -159,7 +159,7 @@ namespace BusinessObject
                 entity.ToTable("PropertyFile");
 
                 entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
+                    //.ValueGeneratedNever()
                     .HasColumnName("ID");
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
@@ -181,7 +181,7 @@ namespace BusinessObject
             {
                 entity.ToTable("PropertyImage");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                //entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Image)
                     .HasMaxLength(255)
@@ -198,7 +198,7 @@ namespace BusinessObject
             {
                 entity.ToTable("PropertyTransaction");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                //entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Amount).HasColumnType("money");
 
@@ -229,7 +229,7 @@ namespace BusinessObject
             {
                 entity.ToTable("Role");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                //entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Name).HasMaxLength(50);
             });
@@ -238,7 +238,7 @@ namespace BusinessObject
             {
                 entity.ToTable("Transaction");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                //entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Amount).HasColumnType("money");
 
@@ -261,7 +261,7 @@ namespace BusinessObject
             {
                 entity.ToTable("User");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                //entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Address).HasMaxLength(255);
 
@@ -291,11 +291,18 @@ namespace BusinessObject
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.RoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_User_Role");
+                entity.Property(e => e.RefreshToken)
+                .HasMaxLength(200)
+                .IsUnicode(true);
+
+                entity.Property(e => e.RefreshTokenExpiryTime)
+                .HasColumnType("datetime");
+
+                //entity.HasOne(d => d.Role)
+                //    .WithMany(p => p.Users)
+                //    .HasForeignKey(d => d.RoleId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_User_Role");
             });
 
             OnModelCreatingPartial(modelBuilder);
