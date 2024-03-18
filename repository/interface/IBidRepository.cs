@@ -9,7 +9,7 @@ namespace repository
 {
     public interface IBidRepository
     {
-        List<Bid>? GetListByPropertyId(int id);
+        List<Bid>? GetListByPropertyId(int id, int pageNumber, int pageSize);
         Bid? Create(Bid bid);
     }
 }

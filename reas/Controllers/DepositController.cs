@@ -1,7 +1,8 @@
 ﻿using BusinessObject;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
+using reas.Model;
 using service;
-
 
 namespace reas.Controllers
 {
@@ -16,74 +17,139 @@ namespace reas.Controllers
             _depositService = depositService;
         }
 
+        // GET api/deposit
         [HttpGet]
-        public ActionResult<List<Deposit>> GetAllDeposits()
+        [EnableQuery]
+        public ActionResult<IList<Deposit>> GetAllDeposits()
         {
             var deposits = _depositService.GetListByStatusNotZero();
-            if (deposits == null)
+            if (deposits == null || !deposits.Any())
             {
-                return StatusCode(500, "An error occurred while retrieving deposits.");
+                return NotFound(new ResponseModel
+                {
+                    Status = "Error",
+                    Message = "No deposits found."
+                });
             }
-            return Ok(deposits);
+            return Ok(new ResponseModel
+            {
+                Status = "Success",
+                Message = "Deposits retrieved successfully.",
+                Data = deposits
+            });
         }
 
+        // GET api/deposit/{id}
         [HttpGet("{id}")]
         public ActionResult<Deposit> GetDepositById(int id)
         {
             var deposit = _depositService.GetById(id);
             if (deposit == null)
             {
-                return NotFound("Deposit not found.");
+                return NotFound(new ResponseModel
+                {
+                    Status = "Error",
+                    Message = "Deposit not found."
+                });
             }
-            return Ok(deposit);
+            return Ok(new ResponseModel
+            {
+                Status = "Success",
+                Message = "Deposit retrieved successfully.",
+                Data = deposit
+            });
         }
 
-
+        // POST api/deposit
         [HttpPost]
-        public ActionResult<Deposit> CreateDeposit(Deposit deposit)
+        public IActionResult CreateDeposit([FromBody] CreateDepositModel model)
         {
-            var createdDeposit = _depositService.Insert(deposit.UserId, deposit.PropertyId, deposit.Amount);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var createdDeposit = _depositService.Insert(model.UserId, model.PropertyId, model.Amount);
             if (createdDeposit == null)
             {
-                return StatusCode(500, "An error occurred while creating deposit.");
+                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseModel
+                {
+                    Status = "Error",
+                    Message = "An error occurred while creating deposit."
+                });
             }
-            return CreatedAtAction(nameof(GetDepositById), new { id = createdDeposit.Id }, createdDeposit);
+            return CreatedAtAction(nameof(GetDepositById), new { id = createdDeposit.Id }, new ResponseModel
+            {
+                Status = "Success",
+                Message = "Deposit created successfully.",
+                Data = createdDeposit
+            });
         }
 
-        [HttpPut("{id}/updatestatus/{newStatus}")]
-        public ActionResult<Deposit> UpdateDepositStatus(int id, int newStatus)
+        // PUT api/deposit/{id}/updatestatus
+        [HttpPut("{id}/updatestatus")]
+        public IActionResult UpdateDepositStatus(int id, [FromBody] UpdateDepositStatusModel model)
         {
-            var updatedDeposit = _depositService.UpdateStatus(id, newStatus);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (model.NewStatus <= 0) 
+            {
+                return BadRequest("New status must be greater than 0.");
+            }
+
+            var updatedDeposit = _depositService.UpdateStatus(id, model.NewStatus);
             if (updatedDeposit == null)
             {
-                return StatusCode(500, $"An error occurred while updating deposit with ID: {id}.");
+                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseModel
+                {
+                    Status = "Error",
+                    Message = $"An error occurred while updating deposit with ID: {id}."
+                });
             }
-            return Ok(updatedDeposit);
+            return Ok(new ResponseModel
+            {
+                Status = "Success",
+                Message = "Deposit status updated successfully.",
+                Data = updatedDeposit
+            });
         }
+
+        // GET api/deposit/check
         [HttpGet("check")]
-        public ActionResult CheckDeposit([FromQuery] int userId, [FromQuery] int propertyId)
+        public ActionResult CheckDeposit([FromQuery] CheckDepositModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
-                var depositExists = _depositService.CheckDeposit(userId, propertyId);
-                if (depositExists.HasValue && depositExists.Value)
+                var depositExists = _depositService.CheckDeposit(model.UserId, model.PropertyId);
+                if (!depositExists.HasValue)
                 {
-                    return Ok(new { message = "Deposit exists." });
+                    return StatusCode(StatusCodes.Status500InternalServerError, new ResponseModel
+                    {
+                        Status = "Error",
+                        Message = "An error occurred while checking deposit existence."
+                    });
                 }
-                else if (depositExists.HasValue && !depositExists.Value)
+                return Ok(new ResponseModel
                 {
-                    return Ok(new { message = "Deposit does not exist." });
-                }
-                else
-                {
-                    return StatusCode(500, "An error occurred while checking deposit existence.");
-                }
+                    Status = "Success",
+                    Message = depositExists.Value ? "Deposit exists." : "Deposit does not exist."
+                });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"An unexpected error occurred: {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseModel
+                {
+                    Status = "Error",
+                    Message = $"An unexpected error occurred: {ex.Message}"
+                });
             }
         }
     }
 }
-

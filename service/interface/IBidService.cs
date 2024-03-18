@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessObject;
+﻿using BusinessObject;
 
 namespace service
 {
     public interface IBidService
     {
-        List<Bid>? GetListByPropertyId(int id);
+        List<Bid>? GetListByPropertyId(int id, int pageNumber, int pageSize);
         Bid? Create(Bid bid);
     }
 }

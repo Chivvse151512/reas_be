@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "E:\\PRN231\\AssignmentGroupPrn231\\BusinessObject\\BusinessObject.csproj": {}
+    "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj": {}
   },
   "projects": {
-    "E:\\PRN231\\AssignmentGroupPrn231\\BusinessObject\\BusinessObject.csproj": {
+    "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\PRN231\\AssignmentGroupPrn231\\BusinessObject\\BusinessObject.csproj",
+        "projectUniqueName": "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj",
         "projectName": "BusinessObject",
-        "projectPath": "E:\\PRN231\\AssignmentGroupPrn231\\BusinessObject\\BusinessObject.csproj",
-        "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "E:\\PRN231\\AssignmentGroupPrn231\\BusinessObject\\obj\\",
+        "projectPath": "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj",
+        "packagesPath": "/Users/truonghoang/.nuget/packages/",
+        "outputPath": "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/truonghoang/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -81,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.314/RuntimeIdentifierGraph.json"
         }
       }
     }
