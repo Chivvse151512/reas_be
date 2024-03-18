@@ -27,8 +27,9 @@ namespace BusinessObject
         public int Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
-
-        public virtual Role Role { get; set; } = null!;
+		public string? RefreshToken { get; set; }
+		public DateTime? RefreshTokenExpiryTime { get; set; }
+		public virtual Role Role { get; set; } = null!;
         public virtual ICollection<Bid> Bids { get; set; }
         public virtual ICollection<Property> PropertySellers { get; set; }
         public virtual ICollection<PropertyTransaction> PropertyTransactionBuyers { get; set; }
