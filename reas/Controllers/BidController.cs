@@ -1,7 +1,8 @@
-﻿using System;
-using BusinessObject;
+﻿using BusinessObject;
 using Microsoft.AspNetCore.Mvc;
 using service;
+using reas.Model;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace reas.Controllers
 {
@@ -18,39 +19,73 @@ namespace reas.Controllers
 
         // POST api/bid
         [HttpPost]
-        public ActionResult<Bid> CreateBid([FromBody] Bid bid)
+        public IActionResult CreateBid([FromBody] CreateBidRequestModel model)
         {
-            try
+            if (model.Amount < 0 || model.PropertyId <= 0 || model.UserId <= 0)
             {
-                var createdBid = _bidService.Create(bid);
-                if (createdBid == null)
+                return BadRequest(new ResponseModel
                 {
-                    return StatusCode(500, "An error occurred while creating the bid.");
-                }
-                return Ok(createdBid);
+                    Status = "Error",
+                    Message = "Invalid auction information. Please check again."
+                });
             }
-            catch (Exception ex)
+            var bid = new Bid
             {
-                return StatusCode(500, $"An unexpected error occurred: {ex.Message}");
+                UserId = model.UserId,
+                PropertyId = model.PropertyId,
+                Amount = model.Amount,
+                Status = 1, // Active status
+                CreatedAt = DateTime.UtcNow
+            };
+            var createdBid = _bidService.Create(bid);
+            if (createdBid == null || createdBid.Id <= 0)
+            {
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    new ResponseModel
+                    {
+                        Status = "Error",
+                        Message = "Bid creation failed! Please check bid details and try again."
+                    }
+                );
             }
+            return Ok(new ResponseModel
+            {
+                Status = "Success",
+                Message = "Bid created successfully!"
+            });
         }
 
         // GET api/bid/property/{id}
+        [EnableQuery]
         [HttpGet("property/{id}")]
-        public ActionResult<List<Bid>> GetBidsByPropertyId(int id)
+        public ActionResult GetBidsByPropertyId(int id, int pageNumber, int pageSize)
         {
             try
             {
-                var bids = _bidService.GetListByPropertyId(id);
-                if (bids == null)
+                var bids = _bidService.GetListByPropertyId(id, pageNumber, pageSize);
+                if (bids == null || !bids.Any())
                 {
-                    return StatusCode(500, "An error occurred while retrieving bids for the property.");
+                    return NotFound(new ResponseModel
+                    {
+                        Status = "Error",
+                        Message = "No bids found for the specified property."
+                    });
                 }
-                return Ok(bids);
+                return Ok(new
+                {
+                    Status = "Success",
+                    Message = "Bids retrieved successfully.",
+                    Data = bids
+                });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"An unexpected error occurred: {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseModel
+                {
+                    Status = "Error",
+                    Message = $"An unexpected error occurred: {ex.Message}"
+                });
             }
         }
     }

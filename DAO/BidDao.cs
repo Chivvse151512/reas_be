@@ -34,11 +34,16 @@ namespace DAO
             }
         }
 
-        public List<Bid>? GetListByPropertyId(int id)
+        public List<Bid>? GetListByPropertyId(int id, int pageNumber, int pageSize)
         {
             try
             {
-                return context?.Bids.Where(b => b.PropertyId == id).ToList();
+                int skip = (pageNumber - 1) * pageSize;
+                return context?.Bids
+                    .Where(b => b.PropertyId == id)
+                    .Skip(skip)
+                    .Take(pageSize)
+                    .ToList();
             }
             catch (DbException e)
             {

@@ -1,16 +1,13 @@
 ﻿using BusinessObject;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.OData.Query;
 using reas.Helpers;
 using reas.Model;
 using reas.Services;
 using service;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 namespace reas.Controllers
 {
@@ -38,6 +35,7 @@ namespace reas.Controllers
 
         [HttpGet]
         [Authorize]
+        [EnableQuery]
         [Route("get-list")]
         public ActionResult<List<User>> GetList()
         {
@@ -61,7 +59,6 @@ namespace reas.Controllers
 
             return Ok(user);
         }
-
 
         [HttpPost]
         [AllowAnonymous]

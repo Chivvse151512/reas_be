@@ -3476,37 +3476,36 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ACER\\.nuget\\packages\\": {}
+    "/Users/truonghoang/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\PRN231\\AssignmentGroupPrn231\\reas\\reas.csproj",
+      "projectUniqueName": "/Users/truonghoang/Desktop/PRN231/reas_be/reas/reas.csproj",
       "projectName": "reas",
-      "projectPath": "E:\\PRN231\\AssignmentGroupPrn231\\reas\\reas.csproj",
-      "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "E:\\PRN231\\AssignmentGroupPrn231\\reas\\obj\\",
+      "projectPath": "/Users/truonghoang/Desktop/PRN231/reas_be/reas/reas.csproj",
+      "packagesPath": "/Users/truonghoang/.nuget/packages/",
+      "outputPath": "/Users/truonghoang/Desktop/PRN231/reas_be/reas/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/truonghoang/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "/usr/local/share/dotnet/sdk/7.0.314/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "E:\\PRN231\\AssignmentGroupPrn231\\BusinessObject\\BusinessObject.csproj": {
-              "projectPath": "E:\\PRN231\\AssignmentGroupPrn231\\BusinessObject\\BusinessObject.csproj"
+            "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj": {
+              "projectPath": "/Users/truonghoang/Desktop/PRN231/reas_be/BusinessObject/BusinessObject.csproj"
             },
-            "E:\\PRN231\\AssignmentGroupPrn231\\service\\service.csproj": {
-              "projectPath": "E:\\PRN231\\AssignmentGroupPrn231\\service\\service.csproj"
+            "/Users/truonghoang/Desktop/PRN231/reas_be/service/service.csproj": {
+              "projectPath": "/Users/truonghoang/Desktop/PRN231/reas_be/service/service.csproj"
             }
           }
         }
@@ -3569,7 +3568,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.314/RuntimeIdentifierGraph.json"
       }
     }
   }
