@@ -34,21 +34,24 @@ namespace DAO
             }
         }
 
-        public List<Bid>? GetListByPropertyId(int id, int pageNumber, int pageSize)
+        public IQueryable<Bid> GetListByPropertyId(int propertyId, int pageNumber, int pageSize)
         {
             try
             {
+                if (context == null)
+                    return new List<Bid>().AsQueryable();
+
                 int skip = (pageNumber - 1) * pageSize;
-                return context?.Bids
-                    .Where(b => b.PropertyId == id)
+
+                return context.Bids
+                    .Where(b => b.PropertyId == propertyId)
                     .Skip(skip)
-                    .Take(pageSize)
-                    .ToList();
+                    .Take(pageSize);
             }
             catch (DbException e)
             {
-                Console.WriteLine("Error when getting bid by propertyid: " + e);
-                return null;
+                Console.WriteLine($"Error when getting bid by propertyId: {e.Message}");
+                return new List<Bid>().AsQueryable();
             }
         }
 

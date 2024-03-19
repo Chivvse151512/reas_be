@@ -1,20 +1,18 @@
 ﻿using BusinessObject;
 using BusinessObject.DTO;
+using DAO;
 using repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace service
 {
     public class PropertyService : IPropertyService
     {
+        private readonly IUserRepository _userRepository;
         private IPropertyRepository propertyRepository;
-        public PropertyService(IPropertyRepository propertyRepository)
+        public PropertyService(IPropertyRepository propertyRepository, IUserRepository userRepository)
         {
             this.propertyRepository = propertyRepository;
+            _userRepository = userRepository;
         }
 
         public void create(CreatePropertyRequest request)
@@ -34,11 +32,12 @@ namespace service
 
             property.Status = 2;
             property.CreatedAt = DateTime.Now;
-            property.UpdatedAt = DateTime.Now;
+            property.UpdatedAt = null;
 
             property.SellerId = currentUserId();
 
             propertyRepository.create(property);
+
 
         }
 
@@ -49,45 +48,79 @@ namespace service
 
         public void updateStatus(UpdateStatusPropertyRequest request)
         {
-            int user = currentUserId();
+            int userId = currentUserId();
             int status = request.Status;
 
             if (request == null || request.Id <= 0 || status < 0)
             {
-                return;
+                throw new ArgumentException("Invalid request parameters.");
             }
 
             Property property = propertyRepository.get(request.Id);
-            if (property == null)
+            if (property != null)
             {
-                return;
-            }
+                bool isStaff = IsStaff(userId);
+                bool isAdmin = IsAdmin(userId);
 
-            if (status == 2)
+                switch (status)
+                {
+                    case 2:
+                        if (isStaff && property.Status == 1)
+                        {
+                            property.Status = status;
+                            property.VerifyBy = userId;
+                        }
+                        break;
+                    case 3:
+                        if (isStaff && property.Status == 2 && property.VerifyBy == userId)
+                        {
+                            property.Status = status;
+                        }
+                        break;
+                    case 4:
+                        if (isAdmin && property.Status == 3)
+                        {
+                            property.Status = status;
+                        }
+                        break;
+                    case 5:
+                        if ((isStaff && property.Status == 2) || (isAdmin && property.Status == 4))
+                        {
+                            property.Status = status;
+                        }
+                        break;
+                    default:
+                        throw new InvalidOperationException("Invalid status value.");
+                }
+
+                if (property.Status != request.Status)
+                {
+                    throw new InvalidOperationException("Status transition is not allowed.");
+                }
+
+                property.UpdatedAt = DateTime.Now;
+                propertyRepository.update(property);
+            }
+            else
             {
-
+                throw new ArgumentException("Property not found.");
             }
-            if (status == 3)
-            {
-
-            }
-            if (status == 4)
-            {
-
-            }
-            if (status == 5)
-            {
-
-            }
-            if (status == 6)
-            {
-
-            }
-
-            property.Status = request.Status;
-            propertyRepository.update(property);
-
         }
+
+        private bool IsStaff(int userId)
+        {
+            User user = _userRepository.Get(userId); 
+            Role userRole = RoleDao.Instance.Get(user.RoleId);
+            return userRole.Name.Equals("Staff", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private bool IsAdmin(int userId)
+        {
+            User user = _userRepository.Get(userId); 
+            Role userRole = RoleDao.Instance.Get(user.RoleId); 
+            return userRole.Name.Equals("Admin", StringComparison.OrdinalIgnoreCase);
+        }
+
 
         public void updatePrice(UpdatePricePropertyRequest request)
         {
@@ -111,6 +144,7 @@ namespace service
 
             property.CurrentWinner = useId;
             property.StartingPrice = request.Price;
+            property.UpdatedAt = DateTime.Now;
 
             propertyRepository.update(property);
         }
@@ -129,6 +163,25 @@ namespace service
         {
             return 1;
         }
-        
+
+        public IQueryable<Property> GetPropertiesByStatus(int status)
+        {
+            return propertyRepository.GetPropertiesByStatus(status);
+        }
+
+        public IQueryable<Property> GetPropertiesToVerify(int staffId)
+        {
+            return propertyRepository.GetPropertiesToVerify(staffId);
+        }
+
+        public IQueryable<Property> GetFinishedPropertiesByUser(int userId)
+        {
+            return propertyRepository.GetPropertiesByUser(userId);
+        }
+
+        public IQueryable<Property> GetPropertiesByUser(int userId)
+        {
+            return propertyRepository.GetPropertiesByUser(userId);
+        }
     }
 }

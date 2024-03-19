@@ -12,7 +12,7 @@ namespace DAO
     public class PropertyManagement
     {
         private readonly ReasContext? context;
-        private static PropertyManagement instance = null;
+        private static PropertyManagement? instance = null;
         public static PropertyManagement Instance
         {
             get {
@@ -76,8 +76,21 @@ namespace DAO
             return true;
         }
 
-        
-
-        
+        public IQueryable<Property> GetPropertiesByStatus(int status) // dùng cho 1,3 và 4
+        {
+            return context.Properties.Where(p => p.Status == status);
+        }
+        public IQueryable<Property> GetPropertiesToVerify(int staffId)
+        {
+            return context.Properties.Where(p => p.Status == 2 && p.VerifyBy == staffId);
+        }
+        public IQueryable<Property> GetFinishedPropertiesByUser(int userId)
+        {
+            return context.Properties.Where(p => p.Status == 5 && p.CurrentWinner == userId);
+        }
+        public IQueryable<Property> GetPropertiesByUser(int userId)
+        {
+            return context.Properties.Where(p => p.SellerId == userId);
+        }
     }
 }

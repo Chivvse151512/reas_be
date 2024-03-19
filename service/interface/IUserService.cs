@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessObject;
+﻿using BusinessObject;
 
 namespace service
 {
@@ -17,7 +12,7 @@ namespace service
 		User FindByUserName(string userName);
 		List<User> Get();
 		User Get(int id);
-		Role GetRole(User user);
-		bool Update(User user);
+        Role GetRole(User user);
+        bool Update(User user);
 	}
 }

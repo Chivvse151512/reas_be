@@ -2,62 +2,51 @@
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="reas/Controllers/BidController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="reas/Program.cs">
     <Files>
-      <File FileName="BusinessObject/Bid.cs" Line="1" Column="1" />
-      <File FileName="DAO/BidDao.cs" Line="13" Column="10" />
-      <File FileName="DAO/DepositDao.cs" Line="128" Column="9" />
-      <File FileName="repository/BidRepository.cs" />
-      <File FileName="repository/interface/IBidRepository.cs" />
-      <File FileName="repository/interface/IDepositRepository.cs" />
-      <File FileName="service/BidService.cs" />
-      <File FileName="service/interface/IBidService.cs" />
-      <File FileName="repository/DepositRepository.cs" />
-      <File FileName="service/interface/IDepositService.cs" />
-      <File FileName="service/DepositService.cs" />
-      <File FileName="BusinessObject/Deposit.cs" />
-      <File FileName="reas/Controllers/BidController.cs" Line="6" Column="1" />
-      <File FileName="reas/Controllers/DepositController.cs" Line="1" Column="7" />
-      <File FileName="DAO/PropertyManagement.cs" Line="1" Column="1" />
-      <File FileName="reas/Controllers/WeatherForecastController.cs" Line="1" Column="1" />
-      <File FileName="reas/Controllers/UserController.cs" Line="9" Column="1" />
-      <File FileName="reas/appsettings.json" Line="23" Column="39" />
-      <File FileName="BusinessObject/DTO/CreatePropertyRequest.cs" Line="1" Column="1" />
-      <File FileName="BusinessObject/DTO/Message.cs" Line="1" Column="1" />
-      <File FileName="BusinessObject/DTO/UpdatePricePropertyRequest.cs" Line="1" Column="1" />
-      <File FileName="BusinessObject/DTO/UpdateStatusPropertyRequest.cs" Line="1" Column="1" />
-      <File FileName="reas/Controllers/TokenController.cs" Line="36" Column="34" />
-      <File FileName="reas/Helpers/CryptoHelpers.cs" Line="4" Column="6" />
-      <File FileName="reas/Helpers/SwaggerCustomSchemaFilter.cs" Line="17" Column="43" />
-      <File FileName="reas/Model/LoginRequestModel.cs" Line="1" Column="1" />
-      <File FileName="reas/Model/ForgotPasswordModel.cs" Line="1" Column="1" />
-      <File FileName="reas/Model/ResponseModel.cs" Line="1" Column="1" />
-      <File FileName="reas/Model/UserSignUpRequestModel.cs" Line="14" Column="1" />
+      <File FileName="reas/Controllers/UserController.cs" Line="3" Column="1" />
+      <File FileName="reas/Controllers/BidController.cs" Line="1" Column="1" />
+      <File FileName="BusinessObject/Bid.cs" Line="9" Column="9" />
+      <File FileName="reas/Model/UserSignUpRequestModel.cs" Line="1" Column="1" />
+      <File FileName="reas/Model/CreateBidRequestModel.cs" Line="3" Column="22" />
+      <File FileName="BusinessObject/Deposit.cs" Line="1" Column="1" />
+      <File FileName="BusinessObject/News.cs" Line="1" Column="1" />
+      <File FileName="BusinessObject/Property.cs" Line="1" Column="1" />
+      <File FileName="reas/Model/ResponseModel.cs" Line="7" Column="23" />
+      <File FileName="DAO/BidDao.cs" Line="37" Column="16" />
+      <File FileName="repository/BidRepository.cs" Line="15" Column="124" />
+      <File FileName="repository/interface/IDepositRepository.cs" Line="1" Column="1" />
+      <File FileName="repository/interface/IBidRepository.cs" Line="12" Column="39" />
+      <File FileName="service/interface/IBidService.cs" Line="7" Column="77" />
+      <File FileName="service/BidService.cs" Line="20" Column="78" />
+      <File FileName="reas/Controllers/DepositController.cs" Line="6" Column="1" />
+      <File FileName="reas/Controllers/PropertyController.cs" Line="3" Column="1" />
+      <File FileName="DAO/DepositDao.cs" Line="1" Column="1" />
+      <File FileName="DAO/UserDao.cs" Line="1" Column="1" />
       <File FileName="reas/Model/UserUpdateProfileRequestModel.cs" Line="1" Column="1" />
-      <File FileName="reas/Model/TokenRefreshRequestModel.cs" Line="1" Column="1" />
-      <File FileName="reas/Model/ChangePasswordRequestModel.cs" Line="1" Column="1" />
       <File FileName="reas/Model/EmailConfiguration.cs" Line="1" Column="1" />
-      <File FileName="reas/Model/ForgotPasswordConfirmModel.cs" Line="1" Column="1" />
-      <File FileName="reas/Controllers/PropertyController.cs" Line="23" Column="9" />
-      <File FileName="BusinessObject/BusinessObject.csproj" Line="16" Column="66" />
-      <File FileName="../../../../../usr/local/share/dotnet/sdk/7.0.314/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" Line="266" Column="5" />
+      <File FileName="reas/Model/ChangePasswordRequestModel.cs" Line="1" Column="1" />
+      <File FileName="reas/Model/CreateDepositModel.cs" Line="7" Column="3" />
+      <File FileName="reas/Model/UpdateDepositStatusModel.cs" Line="1" Column="1" />
+      <File FileName="reas/Model/CheckDepositModel.cs" Line="1" Column="1" />
+      <File FileName="reas/Controllers/TokenController.cs" Line="1" Column="1" />
+      <File FileName="reas/Program.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="reas" expanded="True" selected="True">
-            <Node name="BusinessObject">
+          <Node name="reas" selected="True">
+            <Node name="BusinessObject" expanded="True">
               <Node name="Dependencies" expanded="True">
                 <Node name="PackageDependencies" expanded="True" />
               </Node>
-              <Node name="DTO" expanded="True" />
             </Node>
-            <Node name="reas">
-              <Node name="Dependencies" expanded="True">
-                <Node name="PackageDependencies" expanded="True" />
-              </Node>
+            <Node name="DAO" expanded="True" />
+            <Node name="reas" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="Model" expanded="True" />
+            </Node>
+            <Node name="service" expanded="True">
+              <Node name="interface" expanded="True" />
             </Node>
           </Node>
         </State>
