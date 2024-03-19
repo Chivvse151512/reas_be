@@ -12,6 +12,6 @@ namespace repository
     {
         public Bid? Create(Bid bid) => BidDao.Instance.Create(bid);
 
-        public List<Bid>? GetListByPropertyId(int id, int pageNumber, int pageSize) => BidDao.Instance.GetListByPropertyId(id, pageNumber, pageSize);
+        public IQueryable<Bid>? GetListByPropertyId(int id, int pageNumber, int pageSize) => BidDao.Instance.GetListByPropertyId(id, pageNumber, pageSize);
     }
 }

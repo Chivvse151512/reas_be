@@ -21,7 +21,7 @@ namespace service
                 "An error occurred while creating a new bid.");
         }
 
-        public List<Bid>? GetListByPropertyId(int id, int pageNumber, int pageSize)
+        public IQueryable<Bid>? GetListByPropertyId(int id, int pageNumber, int pageSize)
         {
             return ExecuteWithErrorHandling(() => _bidRepository.GetListByPropertyId(id, pageNumber, pageSize),
                 "An error occurred while retrieving all bids by propertyId.");

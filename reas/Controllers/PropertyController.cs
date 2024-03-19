@@ -2,6 +2,7 @@
 using BusinessObject.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using reas.Model;
 using service;
 
 namespace reas.Controllers
@@ -11,10 +12,13 @@ namespace reas.Controllers
     public class PropertyController : ControllerBase
     {
 
-        private IPropertyService propertyService;
-        public PropertyController(IPropertyService propertyService)
+        private readonly IPropertyService propertyService;
+        private readonly ILogger<PropertyController> logger;
+
+        public PropertyController(IPropertyService propertyService, ILogger<PropertyController> logger)
         {
             this.propertyService = propertyService;
+            this.logger = logger;
         }
 
 
@@ -25,11 +29,11 @@ namespace reas.Controllers
             try
             {
                 List<Property> properties =  propertyService.get().ToList();
-                return Ok(properties);
+                return Ok(new ResponseModel { Status = "Success", Data = properties });
             }
             catch (Exception ex)
             {
-                return BadRequest(Message.of(ex.Message));
+                return BadRequest(new ResponseModel { Status = "Error", Message = ex.Message });
             }
         }
 
@@ -40,12 +44,12 @@ namespace reas.Controllers
             try
             {
                 propertyService.create(request);
-                return Ok();
+                return Ok(new ResponseModel { Status = "Success", Message = "Property created successfully" });
 
 
             } catch (Exception ex)
             {
-                return BadRequest(Message.of(ex.Message));
+                return BadRequest(new ResponseModel { Status = "Error", Message = ex.Message });
             }
         }
 
@@ -56,37 +60,88 @@ namespace reas.Controllers
         }
 
         [HttpPost("update-status")]
-        public IActionResult updateStatus(UpdateStatusPropertyRequest request)
+        public IActionResult UpdateStatus([FromBody] UpdateStatusPropertyRequest request)
         {
             try
             {
                 propertyService.updateStatus(request);
-                return Ok();
-
-
+                return Ok(new ResponseModel { Status = "Success", Message = "Property status updated successfully" });
+            }
+            catch (ArgumentException ex)
+            {
+                logger.LogWarning(ex, "Invalid argument provided to UpdateStatus.");
+                return BadRequest(new ResponseModel { Status = "Error", Message = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                logger.LogWarning(ex, "Invalid operation attempted in UpdateStatus.");
+                return BadRequest(new ResponseModel { Status = "Error", Message = ex.Message });
             }
             catch (Exception ex)
             {
-                return BadRequest(Message.of(ex.Message));
+                logger.LogError(ex, "An unexpected error occurred while updating the property status.");
+                return StatusCode(500, new ResponseModel { Status = "Error", Message = "An error occurred while updating the property status." });
             }
         }
 
         [HttpPost("update-price")]
-        public IActionResult updateCurrentPrice(UpdatePricePropertyRequest request)
+        public IActionResult UpdateCurrentPrice(UpdatePricePropertyRequest request)
         {
             try
             {
                 propertyService.updatePrice(request);
-                return Ok();
-
-
+                return Ok(new ResponseModel { Status = "Success", Message = "Property price updated successfully" });
             }
             catch (Exception ex)
             {
-                return BadRequest(Message.of(ex.Message));
+                return BadRequest(new ResponseModel { Status = "Error", Message = ex.Message });
             }
         }
 
+        [HttpGet("to-verify/{staffId}")]
+        [EnableQuery]
+        public IActionResult GetPropertiesToVerify(int staffId)
+        {
+            try
+            {
+                var properties = propertyService.GetPropertiesToVerify(staffId);
+                return Ok(new ResponseModel { Status = "Success", Data = properties });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseModel { Status = "Error", Message = ex.Message });
+            }
+        }
+
+        [HttpGet("finished/{userId}")]
+        [EnableQuery]
+        public IActionResult GetFinishedPropertiesByUser(int userId)
+        {
+            try
+            {
+                var properties = propertyService.GetFinishedPropertiesByUser(userId);
+                return Ok(new ResponseModel { Status = "Success", Data = properties });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseModel { Status = "Error", Message = ex.Message });
+            }
+        }
+
+        [HttpGet("by-user/{userId}")]
+        [EnableQuery]
+        public IActionResult GetPropertiesByUser(int userId)
+        {
+            try
+            {
+                var properties = propertyService.GetPropertiesByUser(userId);
+                return Ok(new ResponseModel { Status = "Success", Data = properties });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseModel { Status = "Error", Message = ex.Message });
+            }
+        }
 
 
     }

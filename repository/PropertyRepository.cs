@@ -38,5 +38,25 @@ namespace repository
         {
             return propertyManagement.update(property);
         }
+
+        public IQueryable<Property> GetPropertiesByStatus(int status)
+        {
+            return propertyManagement.GetPropertiesByStatus(status);
+        }
+
+        public IQueryable<Property> GetPropertiesToVerify(int staffId)
+        {
+            return propertyManagement.GetPropertiesToVerify(staffId);
+        }
+
+        public IQueryable<Property> GetFinishedPropertiesByUser(int userId)
+        {
+            return propertyManagement.GetFinishedPropertiesByUser(userId);
+        }
+
+        public IQueryable<Property> GetPropertiesByUser(int userId)
+        {
+            return propertyManagement.GetPropertiesByUser(userId);
+        }
     }
 }

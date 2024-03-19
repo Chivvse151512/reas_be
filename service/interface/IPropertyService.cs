@@ -17,6 +17,10 @@ namespace service
         void updatePrice(UpdatePricePropertyRequest request);
         Property get(int id);
         IEnumerable<Property> get();
-       
+        IQueryable<Property> GetPropertiesByStatus(int status);
+        IQueryable<Property> GetPropertiesToVerify(int staffId);
+        IQueryable<Property> GetFinishedPropertiesByUser(int userId);
+        IQueryable<Property> GetPropertiesByUser(int userId);
+        
     }
 }
