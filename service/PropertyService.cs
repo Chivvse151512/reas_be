@@ -154,6 +154,11 @@ namespace service
             return propertyRepository.get(id);
         }
 
+        public PropertyWithBidsDTO GetPropertyWithBids(int propertyId)
+        {
+            return propertyRepository.GetPropertyWithBids(propertyId);
+        }
+
         public IEnumerable<Property> get()
         {
             return propertyRepository.get();

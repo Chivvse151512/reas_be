@@ -143,6 +143,26 @@ namespace reas.Controllers
             }
         }
 
-
+        [HttpGet("{propertyId}")]
+        public IActionResult GetPropertyWithBids(int propertyId)
+        {
+            try
+            {
+                var propertyWithBids = propertyService.GetPropertyWithBids(propertyId);
+                if (propertyWithBids != null)
+                {
+                    return Ok(new ResponseModel { Status = "Success", Data = propertyWithBids });
+                }
+                else
+                {
+                    return NotFound(new ResponseModel { Status = "Error", Message = "Property not found" });
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred while retrieving the property with bids.");
+                return StatusCode(500, new ResponseModel { Status = "Error", Message = "An error occurred while retrieving the property with bids." });
+            }
+        }
     }
 }
