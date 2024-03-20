@@ -1,11 +1,6 @@
 ﻿using BusinessObject;
+using BusinessObject.DTO;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAO
 {
@@ -15,13 +10,14 @@ namespace DAO
         private static PropertyManagement? instance = null;
         public static PropertyManagement Instance
         {
-            get {
+            get
+            {
                 if (instance == null)
                 {
                     instance = new PropertyManagement();
                 }
 
-                return instance; 
+                return instance;
             }
         }
 
@@ -67,7 +63,7 @@ namespace DAO
 
             return true;
         }
-        public bool delete(Property property) 
+        public bool delete(Property property)
         {
             property.Status = 0;
             context.Properties.Update(property);
@@ -91,6 +87,22 @@ namespace DAO
         public IQueryable<Property> GetPropertiesByUser(int userId)
         {
             return context.Properties.Where(p => p.SellerId == userId);
+        }
+        public PropertyWithBidsDTO GetPropertyWithBids(int propertyId)
+        {
+            var propertyWithBids = context.Properties
+                                          .Where(p => p.Id == propertyId)
+                                          .Include(p => p.Bids)
+                                          .Select(property => new PropertyWithBidsDTO
+                                          {
+                                              Id = property.Id,
+                                              SellerId = property.SellerId,
+                                              CurrentWinner = property.CurrentWinner,
+                                              VerifyBy = property.VerifyBy,
+                                              Bids = property.Bids.ToList()
+                                          })
+                                          .FirstOrDefault();
+            return propertyWithBids;
         }
     }
 }

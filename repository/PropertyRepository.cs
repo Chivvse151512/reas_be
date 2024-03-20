@@ -1,4 +1,5 @@
 ﻿using BusinessObject;
+using BusinessObject.DTO;
 using DAO;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,11 @@ namespace repository
         public IQueryable<Property> GetPropertiesByUser(int userId)
         {
             return propertyManagement.GetPropertiesByUser(userId);
+        }
+
+        public PropertyWithBidsDTO GetPropertyWithBids(int propertyId)
+        {
+            return propertyManagement.GetPropertyWithBids(propertyId);
         }
     }
 }

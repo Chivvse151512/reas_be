@@ -1,60 +1,88 @@
 ﻿<Properties StartupConfiguration="{465CAC6C-0323-41BA-8ECB-411FBAC8A15B}|Default">
+  <MonoDevelop.Ide.ItemProperties.reas PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="reas/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="reas/Controllers/UserController.cs">
     <Files>
       <File FileName="reas/Controllers/UserController.cs" Line="3" Column="1" />
-      <File FileName="reas/Controllers/BidController.cs" Line="1" Column="1" />
-      <File FileName="BusinessObject/Bid.cs" Line="9" Column="9" />
-      <File FileName="reas/Model/UserSignUpRequestModel.cs" Line="1" Column="1" />
-      <File FileName="reas/Model/CreateBidRequestModel.cs" Line="3" Column="22" />
-      <File FileName="BusinessObject/Deposit.cs" Line="1" Column="1" />
-      <File FileName="BusinessObject/News.cs" Line="1" Column="1" />
-      <File FileName="BusinessObject/Property.cs" Line="1" Column="1" />
-      <File FileName="reas/Model/ResponseModel.cs" Line="7" Column="23" />
-      <File FileName="DAO/BidDao.cs" Line="37" Column="16" />
-      <File FileName="repository/BidRepository.cs" Line="15" Column="124" />
-      <File FileName="repository/interface/IDepositRepository.cs" Line="1" Column="1" />
-      <File FileName="repository/interface/IBidRepository.cs" Line="12" Column="39" />
-      <File FileName="service/interface/IBidService.cs" Line="7" Column="77" />
-      <File FileName="service/BidService.cs" Line="20" Column="78" />
-      <File FileName="reas/Controllers/DepositController.cs" Line="6" Column="1" />
-      <File FileName="reas/Controllers/PropertyController.cs" Line="3" Column="1" />
-      <File FileName="DAO/DepositDao.cs" Line="1" Column="1" />
-      <File FileName="DAO/UserDao.cs" Line="1" Column="1" />
-      <File FileName="reas/Model/UserUpdateProfileRequestModel.cs" Line="1" Column="1" />
-      <File FileName="reas/Model/EmailConfiguration.cs" Line="1" Column="1" />
-      <File FileName="reas/Model/ChangePasswordRequestModel.cs" Line="1" Column="1" />
-      <File FileName="reas/Model/CreateDepositModel.cs" Line="7" Column="3" />
-      <File FileName="reas/Model/UpdateDepositStatusModel.cs" Line="1" Column="1" />
-      <File FileName="reas/Model/CheckDepositModel.cs" Line="1" Column="1" />
-      <File FileName="reas/Controllers/TokenController.cs" Line="1" Column="1" />
-      <File FileName="reas/Program.cs" Line="1" Column="1" />
+      <File FileName="reas/Controllers/BidController.cs" />
+      <File FileName="BusinessObject/Bid.cs" />
+      <File FileName="reas/Model/UserSignUpRequestModel.cs" />
+      <File FileName="reas/Model/CreateBidRequestModel.cs" />
+      <File FileName="BusinessObject/Deposit.cs" />
+      <File FileName="BusinessObject/News.cs" />
+      <File FileName="BusinessObject/Property.cs" />
+      <File FileName="reas/Model/ResponseModel.cs" />
+      <File FileName="DAO/BidDao.cs" />
+      <File FileName="repository/BidRepository.cs" />
+      <File FileName="repository/interface/IDepositRepository.cs" />
+      <File FileName="repository/interface/IBidRepository.cs" />
+      <File FileName="service/interface/IBidService.cs" />
+      <File FileName="service/BidService.cs" />
+      <File FileName="reas/Controllers/DepositController.cs" />
+      <File FileName="reas/Controllers/PropertyController.cs" />
+      <File FileName="DAO/DepositDao.cs" />
+      <File FileName="DAO/UserDao.cs" />
+      <File FileName="reas/Model/UserUpdateProfileRequestModel.cs" />
+      <File FileName="reas/Model/EmailConfiguration.cs" />
+      <File FileName="reas/Model/ChangePasswordRequestModel.cs" />
+      <File FileName="reas/Model/CreateDepositModel.cs" />
+      <File FileName="reas/Model/UpdateDepositStatusModel.cs" />
+      <File FileName="reas/Model/CheckDepositModel.cs" />
+      <File FileName="reas/Controllers/TokenController.cs" />
+      <File FileName="reas/Program.cs" />
+      <File FileName="BusinessObject/DTO/Message.cs" />
+      <File FileName="reas/Model/ForgotPasswordConfirmModel.cs" />
+      <File FileName="reas/Model/LoginRequestModel.cs" />
+      <File FileName="DAO/PropertyManagement.cs" />
+      <File FileName="BusinessObject/PropertyFile.cs" />
+      <File FileName="BusinessObject/PropertyImage.cs" />
+      <File FileName="BusinessObject/PropertyTransaction.cs" />
+      <File FileName="DAO/RoleDao.cs" />
+      <File FileName="service/UserService.cs" />
+      <File FileName="service/DepositService.cs" />
+      <File FileName="reas/Helpers/SwaggerCustomSchemaFilter.cs" />
+      <File FileName="reas/Helpers/CryptoHelpers.cs" />
+      <File FileName="service/PropertyService.cs" />
+      <File FileName="repository/PropertyRepository.cs" />
+      <File FileName="repository/DepositRepository.cs" />
+      <File FileName="repository/interface/IPropertyRepository.cs" />
+      <File FileName="service/interface/IPropertyService.cs" />
+      <File FileName="service/interface/IDepositService.cs" />
+      <File FileName="service/interface/IUserService.cs" />
+      <File FileName="repository/interface/IUserRepository.cs" />
+      <File FileName="reas/Services/EMailSenderService.cs" />
+      <File FileName="reas/Services/IEMailSenderService.cs" />
+      <File FileName="reas/Services/ITokenService.cs" />
+      <File FileName="reas/Services/TokenService.cs" />
+      <File FileName="BusinessObject/DTO/UpdateStatusPropertyRequest.cs" />
+      <File FileName="BusinessObject/Role.cs" />
+      <File FileName="repository/UserRepository.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="reas" selected="True">
+          <Node name="reas">
             <Node name="BusinessObject" expanded="True">
               <Node name="Dependencies" expanded="True">
                 <Node name="PackageDependencies" expanded="True" />
               </Node>
+              <Node name="DTO" expanded="True" />
             </Node>
             <Node name="DAO" expanded="True" />
             <Node name="reas" expanded="True">
-              <Node name="Controllers" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="UserController.cs" selected="True" />
+              </Node>
             </Node>
-            <Node name="service" expanded="True">
-              <Node name="interface" expanded="True" />
-            </Node>
+            <Node name="service" expanded="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.reas PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

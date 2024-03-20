@@ -1,9 +1,5 @@
 ﻿using BusinessObject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BusinessObject.DTO;
 
 namespace repository
 {
@@ -11,6 +7,7 @@ namespace repository
     {
         IEnumerable<Property> get();
         Property get(int id);
+        PropertyWithBidsDTO GetPropertyWithBids(int propertyId);
         bool create(Property property);
         bool update(Property property);
         bool delete(Property property);
