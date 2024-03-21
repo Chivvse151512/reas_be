@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -17,6 +18,19 @@ ConfigurationManager configuration = builder.Configuration;
 var emailConfig = configuration
 	.GetSection("EmailConfiguration")
 	.Get<EmailConfiguration>();
+
+builder.Services.AddControllers().AddOData(options => options.Select().Filter().OrderBy().Count().SetMaxTop(100).Expand().Filter());
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "AllowSpecificOrigin",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:3000")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
 builder
 	.Services
 	.AddSingleton(emailConfig);
@@ -31,6 +45,18 @@ builder
    .AddScoped<ITokenService, TokenService>()
    .AddScoped<IUserRepository, UserRepository>()
    .AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IPropertyService, PropertyService>();
+
+builder.Services.AddScoped<IDepositService, DepositService>();
+builder.Services.AddScoped<IBidService, BidService>();
+
+builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
+builder.Services.AddScoped<IDepositRepository, DepositRepository>();
+builder.Services.AddScoped<IBidRepository, BidRepository>();
+
+
+
 
 
 
@@ -106,6 +132,7 @@ var app = builder.Build();
 //{
 app.UseSwagger();
 app.UseSwaggerUI();
+app.UseCors("AllowSpecificOrigin");
 //}
 
 app.UseHttpsRedirection();
