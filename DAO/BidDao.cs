@@ -55,19 +55,41 @@ namespace DAO
             }
         }
 
-        public Bid? Create(Bid bid)
+        public async Task<bool> PlaceBidAsync(int userId, int propertyId, decimal amount)
         {
-            try
+            if (context == null)
             {
-                context?.Bids.Add(bid);
-                context?.SaveChanges();
-                return bid;
+                throw new InvalidOperationException("Database context is not initialized.");
             }
-            catch (Exception e)
+
+            // Get the current highest bid for the property
+            var highestBid = await context.Bids
+                .Where(b => b.PropertyId == propertyId)
+                .OrderByDescending(b => b.Amount)
+                .Select(b => b.Amount)
+                .FirstOrDefaultAsync();
+
+            // Check if the new bid is higher than the current highest bid
+            if (amount <= highestBid)
             {
-                Console.WriteLine("Error when creating new bid: " + e);
-                return null;
+                return false;
             }
+
+            // Create a new bid
+            var bid = new Bid
+            {
+                UserId = userId,
+                PropertyId = propertyId,
+                Amount = amount,
+                Status = 1, 
+                CreatedAt = DateTime.UtcNow
+            };
+
+            // Add the new bid to the context and save changes
+            context.Bids.Add(bid);
+            await context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

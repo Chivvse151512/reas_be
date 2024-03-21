@@ -19,9 +19,9 @@ namespace reas.Controllers
 
         // POST api/bid
         [HttpPost]
-        public IActionResult CreateBid([FromBody] CreateBidRequestModel model)
+        public async Task<IActionResult> PlaceBid([FromBody] CreateBidRequestModel model)
         {
-            if (model.Amount < 0 || model.PropertyId <= 0 || model.UserId <= 0)
+            if (model.Amount <= 0 || model.PropertyId <= 0 || model.UserId <= 0)
             {
                 return BadRequest(new ResponseModel
                 {
@@ -29,23 +29,15 @@ namespace reas.Controllers
                     Message = "Invalid auction information. Please check again."
                 });
             }
-            var bid = new Bid
-            {
-                UserId = model.UserId,
-                PropertyId = model.PropertyId,
-                Amount = model.Amount,
-                Status = 1, // Active status
-                CreatedAt = DateTime.UtcNow
-            };
-            var createdBid = _bidService.Create(bid);
-            if (createdBid == null || createdBid.Id <= 0)
+            bool bidSuccess = await _bidService.PlaceBidAsync(model.UserId, model.PropertyId, model.Amount);
+            if (!bidSuccess)
             {
                 return StatusCode(
-                    StatusCodes.Status500InternalServerError,
+                    StatusCodes.Status400BadRequest,
                     new ResponseModel
                     {
                         Status = "Error",
-                        Message = "Bid creation failed! Please check bid details and try again."
+                        Message = "Bid creation failed! Bid amount must be greater than the current highest bid."
                     }
                 );
             }
@@ -56,7 +48,6 @@ namespace reas.Controllers
             });
         }
 
-        // GET api/bid/property/{id}
         [EnableQuery]
         [HttpGet("property/{id}")]
         public ActionResult GetBidsByPropertyId(int id, int pageNumber, int pageSize)
