@@ -23,20 +23,39 @@ namespace service
 
             // check start date, end date
 
-            Property property = new Property();
-            property.Title = request.Title;
-            property.Description = request.Description;
-            property.Address = request.Address;
-            property.StartDate = request.StartDate;
-            property.EndDate = request.EndDate;
-            property.StartingPrice = request.StartingPrice;
-            property.StepPrice = request.StepPrice;
+            Property property = new Property
+            {
+                Title = request.Title,
+                Description = request.Description,
+                Address = request.Address,
+                StartDate = request.StartDate,
+                EndDate = request.EndDate,
+                StartingPrice = request.StartingPrice,
+                StepPrice = request.StepPrice,
 
-            property.Status = 2;
-            property.CreatedAt = DateTime.Now;
-            property.UpdatedAt = null;
+                Status = 1,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = null,
 
-            property.SellerId = currentUserId();
+                SellerId = currentUserId()
+            };
+            var files = request.Files.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var file in files)
+            {
+                property.PropertyFiles.Add(new PropertyFile
+                {
+                    File = file,
+                    CreatedAt = DateTime.Now,
+                });
+            }
+            var images = request.Images.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var image in images)
+            {
+                property.PropertyImages.Add(new PropertyImage
+                {
+                    Image = image,
+                });
+            }
             propertyRepository.create(property);
         }
 

@@ -86,9 +86,8 @@ namespace reas.Controllers
             {
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Role, role.Name)
             };
-
-            authClaims.Add(new Claim(ClaimTypes.Role, role.Name));
 
             var accessToken = _tokenService.GenerateAccessToken(authClaims);
             var refreshToken = _tokenService.GenerateRefreshToken();
