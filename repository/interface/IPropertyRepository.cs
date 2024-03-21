@@ -1,5 +1,4 @@
 ﻿using BusinessObject;
-using BusinessObject.DTO;
 
 namespace repository
 {
@@ -7,7 +6,7 @@ namespace repository
     {
         IEnumerable<Property> get();
         Property get(int id);
-        PropertyWithBidsDTO GetPropertyWithBids(int propertyId);
+        IQueryable<Property> GetPropertyWithBids(int propertyId);
         bool create(Property property);
         bool update(Property property);
         bool delete(Property property);

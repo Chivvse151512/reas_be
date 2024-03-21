@@ -102,9 +102,10 @@ namespace reas.Controllers
 
             return Ok(new
             {
+                Role = user.RoleId,
                 Token = accessToken,
                 RefreshToken = refreshToken
-            });
+            }); ;
         }
 
         [HttpPost]
