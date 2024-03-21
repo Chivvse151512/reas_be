@@ -1,10 +1,15 @@
-﻿using BusinessObject;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BusinessObject;
 
 namespace repository
 {
     public interface IBidRepository
     {
         IQueryable<Bid>? GetListByPropertyId(int id, int pageNumber, int pageSize);
-        Task<bool> PlaceBidAsync(int userId, int propertyId, decimal amount);
+        Bid? Create(Bid bid);
     }
 }
