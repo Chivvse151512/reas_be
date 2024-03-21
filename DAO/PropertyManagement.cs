@@ -41,7 +41,10 @@ namespace DAO
 
         public IEnumerable<Property> get()
         {
-            return context.Properties.ToList();
+            return context.Properties.Include(p => p.PropertyFiles)
+                                     .Include(i => i.PropertyImages)
+                                     .Include(b => b.Bids)
+                                     .ToList();
         }
         public Property get(int id)
         {
@@ -71,10 +74,11 @@ namespace DAO
 
             return true;
         }
-
-        public IQueryable<Property> GetPropertiesByStatus(int status) // dùng cho 1,3 và 4
+        public IQueryable<Property> GetPropertiesByStatus(int status)
         {
-            return context.Properties.Where(p => p.Status == status);
+            return context.Properties.Where(p => p.Status == status)
+                                     .Include(i => i.PropertyImages)
+                                     .Include(f => f.PropertyFiles);
         }
         public IQueryable<Property> GetPropertiesToVerify(int staffId)
         {
@@ -88,21 +92,11 @@ namespace DAO
         {
             return context.Properties.Where(p => p.SellerId == userId);
         }
-        public PropertyWithBidsDTO GetPropertyWithBids(int propertyId)
+        public IQueryable<Property> GetPropertyWithBids(int propertyId)
         {
-            var propertyWithBids = context.Properties
-                                          .Where(p => p.Id == propertyId)
-                                          .Include(p => p.Bids)
-                                          .Select(property => new PropertyWithBidsDTO
-                                          {
-                                              Id = property.Id,
-                                              SellerId = property.SellerId,
-                                              CurrentWinner = property.CurrentWinner,
-                                              VerifyBy = property.VerifyBy,
-                                              Bids = property.Bids.ToList()
-                                          })
-                                          .FirstOrDefault();
-            return propertyWithBids;
+            return context.Properties.Where(p => p.Id == propertyId)
+                                     .Include(p => p.Bids)
+                                     .Include(i => i.PropertyImages);
         }
     }
 }

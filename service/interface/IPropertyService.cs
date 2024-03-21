@@ -16,7 +16,7 @@ namespace service
         void updateStatus(UpdateStatusPropertyRequest request);
         void updatePrice(UpdatePricePropertyRequest request);
         Property get(int id);
-        PropertyWithBidsDTO GetPropertyWithBids(int propertyId);
+        IQueryable<Property> GetPropertyWithBids(int propertyId);
         IEnumerable<Property> get();
         IQueryable<Property> GetPropertiesByStatus(int status);
         IQueryable<Property> GetPropertiesToVerify(int staffId);

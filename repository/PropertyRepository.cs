@@ -60,7 +60,7 @@ namespace repository
             return propertyManagement.GetPropertiesByUser(userId);
         }
 
-        public PropertyWithBidsDTO GetPropertyWithBids(int propertyId)
+        public IQueryable<Property> GetPropertyWithBids(int propertyId)
         {
             return propertyManagement.GetPropertyWithBids(propertyId);
         }
