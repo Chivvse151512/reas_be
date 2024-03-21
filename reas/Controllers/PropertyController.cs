@@ -29,7 +29,7 @@ namespace reas.Controllers
             try
             {
                 List<Property> properties =  propertyService.get().ToList();
-                return Ok(new ResponseModel { Status = "Success", Data = properties });
+                return Ok(properties);
             }
             catch (Exception ex)
             {
