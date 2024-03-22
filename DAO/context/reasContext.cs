@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 namespace BusinessObject
 {
@@ -32,19 +31,9 @@ namespace BusinessObject
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(GetConnectionString());
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=(local);Uid=sa;Pwd=sa;Database=reas");
             }
-        }
-
-        private string GetConnectionString()
-        {
-            IConfiguration config = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", true, true)
-            .Build();
-            var strConn = config["ConnectionStrings:DB"];
-
-            return strConn;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -52,8 +41,6 @@ namespace BusinessObject
             modelBuilder.Entity<Bid>(entity =>
             {
                 entity.ToTable("Bid");
-
-                //entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Amount).HasColumnType("money");
 
@@ -78,8 +65,6 @@ namespace BusinessObject
             {
                 entity.ToTable("Deposit");
 
-                //entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Amount).HasColumnType("money");
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
@@ -95,8 +80,6 @@ namespace BusinessObject
 
             modelBuilder.Entity<News>(entity =>
             {
-                //entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Author)
                     .HasMaxLength(100)
                     .IsUnicode(false);
@@ -120,17 +103,17 @@ namespace BusinessObject
             {
                 entity.ToTable("Property");
 
-                //entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Address).HasMaxLength(255);
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.CurrentPrice).HasColumnType("money");
 
                 entity.Property(e => e.Description).HasColumnType("text");
 
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Note).HasMaxLength(50);
+                entity.Property(e => e.Note).HasMaxLength(500);
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
 
@@ -142,15 +125,20 @@ namespace BusinessObject
 
                 entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
 
+                entity.HasOne(d => d.CurrentWinner)
+                    .WithMany(p => p.PropertyCurrentWinners)
+                    .HasForeignKey(d => d.CurrentWinnerId)
+                    .HasConstraintName("FK_Property_User1");
+
                 entity.HasOne(d => d.Seller)
                     .WithMany(p => p.PropertySellers)
                     .HasForeignKey(d => d.SellerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Property_User1");
+                    .HasConstraintName("FK_Property_User2");
 
-                entity.HasOne(d => d.VerifyByNavigation)
-                    .WithMany(p => p.PropertyVerifyByNavigations)
-                    .HasForeignKey(d => d.VerifyBy)
+                entity.HasOne(d => d.StaffVerify)
+                    .WithMany(p => p.PropertyStaffVerifies)
+                    .HasForeignKey(d => d.StaffVerifyId)
                     .HasConstraintName("FK_Property_User");
             });
 
@@ -158,9 +146,7 @@ namespace BusinessObject
             {
                 entity.ToTable("PropertyFile");
 
-                entity.Property(e => e.Id)
-                    //.ValueGeneratedNever()
-                    .HasColumnName("ID");
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
@@ -181,8 +167,6 @@ namespace BusinessObject
             {
                 entity.ToTable("PropertyImage");
 
-                //entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Image)
                     .HasMaxLength(255)
                     .IsUnicode(false);
@@ -197,8 +181,6 @@ namespace BusinessObject
             modelBuilder.Entity<PropertyTransaction>(entity =>
             {
                 entity.ToTable("PropertyTransaction");
-
-                //entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Amount).HasColumnType("money");
 
@@ -229,16 +211,12 @@ namespace BusinessObject
             {
                 entity.ToTable("Role");
 
-                //entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Name).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Transaction>(entity =>
             {
                 entity.ToTable("Transaction");
-
-                //entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Amount).HasColumnType("money");
 
@@ -260,8 +238,6 @@ namespace BusinessObject
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("User");
-
-                //entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Address).HasMaxLength(255);
 
@@ -285,24 +261,21 @@ namespace BusinessObject
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
+                entity.Property(e => e.RefreshToken).HasMaxLength(200);
+
+                entity.Property(e => e.RefreshTokenExpiryTime).HasColumnType("datetime");
+
                 entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
 
                 entity.Property(e => e.UserName)
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.RefreshToken)
-                .HasMaxLength(200)
-                .IsUnicode(true);
-
-                entity.Property(e => e.RefreshTokenExpiryTime)
-                .HasColumnType("datetime");
-
-                //entity.HasOne(d => d.Role)
-                //    .WithMany(p => p.Users)
-                //    .HasForeignKey(d => d.RoleId)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_User_Role");
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.RoleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_User_Role");
             });
 
             OnModelCreatingPartial(modelBuilder);

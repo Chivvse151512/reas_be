@@ -1,4 +1,7 @@
-﻿namespace BusinessObject
+﻿using System;
+using System.Collections.Generic;
+
+namespace BusinessObject
 {
     public partial class PropertyImage
     {

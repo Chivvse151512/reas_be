@@ -80,15 +80,15 @@ namespace DAO
                                      .Include(i => i.PropertyImages)
                                      .Include(f => f.PropertyFiles)
                                      .Include(s => s.Seller)
-                                     .Include(v => v.VerifyByNavigation);
+                                     .Include(v => v.StaffVerify);
         }
         public IQueryable<Property> GetPropertiesToVerify(int staffId)
         {
-            return context.Properties.Where(p => p.Status == 2 && p.VerifyBy == staffId);
+            return context.Properties.Where(p => p.Status == 2 && p.StaffVerifyId == staffId);
         }
         public IQueryable<Property> GetFinishedPropertiesByUser(int userId)
         {
-            return context.Properties.Where(p => p.Status == 5 && p.CurrentWinner == userId);
+            return context.Properties.Where(p => p.Status == 5 && p.CurrentWinnerId == userId);
         }
         public IQueryable<Property> GetPropertiesByUser(int userId)
         {
