@@ -62,20 +62,6 @@ namespace DAO
                 throw new InvalidOperationException("Database context is not initialized.");
             }
 
-            // Get the current highest bid for the property
-            var highestBid = await context.Bids
-                .Where(b => b.PropertyId == propertyId)
-                .OrderByDescending(b => b.Amount)
-                .Select(b => b.Amount)
-                .FirstOrDefaultAsync();
-
-            // Check if the new bid is higher than the current highest bid
-            if (amount <= highestBid)
-            {
-                return false;
-            }
-
-            // Create a new bid
             var bid = new Bid
             {
                 UserId = userId,
@@ -85,7 +71,6 @@ namespace DAO
                 CreatedAt = DateTime.UtcNow
             };
 
-            // Add the new bid to the context and save changes
             context.Bids.Add(bid);
             await context.SaveChangesAsync();
 

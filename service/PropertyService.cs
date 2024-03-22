@@ -19,10 +19,6 @@ namespace service
 
         public void create(CreatePropertyRequest request)
         {
-            //check input
-
-            // check start date, end date
-
             Property property = new Property
             {
                 Title = request.Title,
@@ -190,9 +186,32 @@ namespace service
             return 1;
         }
 
-        public IQueryable<Property> GetPropertiesByStatus(int status)
+        public IQueryable<dynamic> GetPropertiesByStatus(int status)
         {
-            return propertyRepository.GetPropertiesByStatus(status);
+            var query = propertyRepository.GetPropertiesByStatus(status)
+                .Select(p => new
+                {
+                    p.Id,
+                    p.Title,
+                    p.Description,
+                    SellerName = p.Seller.FullName,
+                    p.CurrentWinner,
+                    p.Address,
+                    p.StartDate,
+                    p.EndDate,
+                    p.StartingPrice,
+                    p.StepPrice,
+                    p.Status,
+                    p.CreatedAt,
+                    p.UpdatedAt,
+                    VerifyBy = p.VerifyByNavigation.FullName,
+                    p.VerifyStatus,
+                    p.Note,
+                    Files = p.PropertyFiles.Select(pf => pf.File),
+                    Images = p.PropertyImages.Select(pi => pi.Image)
+                });
+
+            return query; // This will return an IQueryable<dynamic>
         }
 
         public IQueryable<Property> GetPropertiesToVerify(int staffId)
