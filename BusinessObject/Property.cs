@@ -1,4 +1,7 @@
-﻿namespace BusinessObject
+﻿using System;
+using System.Collections.Generic;
+
+namespace BusinessObject
 {
     public partial class Property
     {
@@ -19,17 +22,18 @@
         public DateTime EndDate { get; set; }
         public decimal StartingPrice { get; set; }
         public decimal StepPrice { get; set; }
+        public decimal CurrentPrice { get; set; }
         public int SellerId { get; set; }
-        public int? CurrentWinner { get; set; }
+        public int? CurrentWinnerId { get; set; }
         public int Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
-        public int VerifyStatus { get; set; }
-        public int? VerifyBy { get; set; }
+        public int? StaffVerifyId { get; set; }
         public string? Note { get; set; }
 
+        public virtual User? CurrentWinner { get; set; }
         public virtual User Seller { get; set; } = null!;
-        public virtual User? VerifyByNavigation { get; set; }
+        public virtual User? StaffVerify { get; set; }
         public virtual ICollection<Bid> Bids { get; set; }
         public virtual ICollection<Deposit> Deposits { get; set; }
         public virtual ICollection<PropertyFile> PropertyFiles { get; set; }

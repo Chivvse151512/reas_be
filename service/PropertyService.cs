@@ -82,11 +82,11 @@ namespace service
                         if (isStaff && property.Status == 1)
                         {
                             property.Status = status;
-                            property.VerifyBy = userId;
+                            property.StaffVerifyId = userId;
                         }
                         break;
                     case 3:
-                        if (isStaff && property.Status == 2 && property.VerifyBy == userId)
+                        if (isStaff && property.Status == 2 && property.StaffVerifyId == userId)
                         {
                             property.Status = status;
                         }
@@ -156,7 +156,7 @@ namespace service
                 return;
             }
 
-            property.CurrentWinner = userId;
+            property.CurrentWinnerId = userId;
             property.StartingPrice = request.Price;
             property.UpdatedAt = DateTime.Now;
 
@@ -204,8 +204,7 @@ namespace service
                     p.Status,
                     p.CreatedAt,
                     p.UpdatedAt,
-                    VerifyBy = p.VerifyByNavigation.FullName,
-                    p.VerifyStatus,
+                    StaffVerifyId = p.StaffVerify.FullName,
                     p.Note,
                     Files = p.PropertyFiles.Select(pf => pf.File),
                     Images = p.PropertyImages.Select(pi => pi.Image)
