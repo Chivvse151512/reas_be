@@ -10,8 +10,8 @@ namespace repository
 {
     public class BidRepository : IBidRepository
     {
-        public Bid? Create(Bid bid) => BidDao.Instance.Create(bid);
-
         public IQueryable<Bid>? GetListByPropertyId(int id, int pageNumber, int pageSize) => BidDao.Instance.GetListByPropertyId(id, pageNumber, pageSize);
+
+        public Task<bool> PlaceBidAsync(int userId, int propertyId, decimal amount) => BidDao.Instance.PlaceBidAsync(userId, propertyId, amount);
     }
 }

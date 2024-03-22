@@ -5,6 +5,6 @@ namespace service
     public interface IBidService
     {
         IQueryable<Bid>? GetListByPropertyId(int id, int pageNumber, int pageSize);
-        Bid? Create(Bid bid);
+        Task<bool> PlaceBidAsync(int userId, int propertyId, decimal amount);
     }
 }
