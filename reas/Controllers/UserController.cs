@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using Org.BouncyCastle.Utilities;
 using reas.Helpers;
 using reas.Model;
 using reas.Services;
@@ -60,6 +61,29 @@ namespace reas.Controllers
             return Ok(user);
         }
 
+        [HttpGet]
+        [Authorize]
+        [Route("get/current")]
+        public ActionResult<User> Get()
+        {
+            var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var user = _userService.Get(int.Parse(userId));
+
+            if (user == null)
+            {
+                return StatusCode(
+                    StatusCodes.Status404NotFound,
+                    new ResponseModel { Status = "Error", Message = "User not found!" });
+            }
+
+            return Ok(user);
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [Route("login")]
@@ -84,8 +108,7 @@ namespace reas.Controllers
 
             var authClaims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Role, role.Name)
             };
 
@@ -104,7 +127,7 @@ namespace reas.Controllers
                 Role = user.RoleId,
                 Token = accessToken,
                 RefreshToken = refreshToken
-            }); ;
+            });
         }
 
         [HttpPost]
@@ -249,10 +272,15 @@ namespace reas.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("update-profile/{userId}")]
-        public IActionResult UpdateProfile(int userId, [FromBody] UserUpdateProfileRequestModel model)
+        [Route("update-profile")]
+        public IActionResult UpdateProfile([FromBody] UserUpdateProfileRequestModel model)
         {
-            var user = _userService.Get(userId);
+            var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            var user = _userService.Get(int.Parse(userId));
 
             if (user == null)
             {

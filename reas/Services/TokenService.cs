@@ -23,7 +23,7 @@ namespace reas.Services
             var token = new JwtSecurityToken(
                 issuer: _configuration["JWT:ValidIssuer"],
                 audience: _configuration["JWT:ValidAudience"],
-                expires: DateTime.Now.AddMinutes(5), // Thời gian sống token là 5 phút
+                expires: DateTime.Now.AddMinutes(120), // Thời gian sống token là 5 phút
                 claims: claims,
                 signingCredentials: new SigningCredentials(authSigningKey
                 , SecurityAlgorithms.HmacSha256)
