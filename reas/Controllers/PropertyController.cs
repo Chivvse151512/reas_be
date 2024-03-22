@@ -29,7 +29,7 @@ namespace reas.Controllers
             try
             {
                 List<Property> properties =  propertyService.get().ToList();
-                return Ok(properties);
+                return Ok(new ResponseModel { Status = "Success", Data = properties });
             }
             catch (Exception ex)
             {
@@ -37,7 +37,8 @@ namespace reas.Controllers
             }
         }
 
-        [HttpPost("create")]
+        [HttpPost]
+
         public IActionResult create([FromBody] CreatePropertyRequest request)
         {
             try
@@ -104,7 +105,7 @@ namespace reas.Controllers
             try
             {
                 var properties = propertyService.GetPropertiesToVerify(staffId);
-                return Ok(properties);
+                return Ok(new ResponseModel { Status = "Success", Data = properties });
             }
             catch (Exception ex)
             {
@@ -119,7 +120,7 @@ namespace reas.Controllers
             try
             {
                 var properties = propertyService.GetFinishedPropertiesByUser(userId);
-                return Ok(properties);
+                return Ok(new ResponseModel { Status = "Success", Data = properties });
             }
             catch (Exception ex)
             {
@@ -134,7 +135,7 @@ namespace reas.Controllers
             try
             {
                 var properties = propertyService.GetPropertiesByUser(userId);
-                return Ok(properties);
+                return Ok(new ResponseModel { Status = "Success", Data = properties });
             }
             catch (Exception ex)
             {
@@ -142,41 +143,6 @@ namespace reas.Controllers
             }
         }
 
-        [HttpGet("{propertyId}")]
-        public IActionResult GetPropertiesWithBids(int propertyId)
-        {
-            try
-            {
-                var propertyWithBids = propertyService.GetPropertyWithBids(propertyId).ToList();
-                if (propertyWithBids != null)
-                {
-                    return Ok(propertyWithBids);
-                }
-                else
-                {
-                    return NotFound(new ResponseModel { Status = "Error", Message = "Property not found" });
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "An error occurred while retrieving the property with bids.");
-                return StatusCode(500, new ResponseModel { Status = "Error", Message = "An error occurred while retrieving the property with bids." });
-            }
-        }
 
-        [HttpGet("by-status")]
-        [EnableQuery]
-        public IActionResult GetPropertiesByStatus(int statusId)
-        {
-            try
-            {
-                var properties = propertyService.GetPropertiesByStatus(statusId).ToList();
-                return Ok(properties);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new ResponseModel { Status = "Error", Message = ex.Message });
-            }
-        }
     }
 }

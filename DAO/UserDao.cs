@@ -63,7 +63,7 @@ namespace DAO
 			return context
 				.Users
 				.Include(x => x.Role)
-				.FirstOrDefault(x => x.UserName == userName || x.Email == userName);
+				.FirstOrDefault(x => x.UserName == userName);
 		}
 
 		public User FindByEmail(string email)

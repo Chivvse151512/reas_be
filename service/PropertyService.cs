@@ -9,12 +9,10 @@ namespace service
     {
         private readonly IUserRepository _userRepository;
         private IPropertyRepository propertyRepository;
-        private readonly IBidService bidService;
-        public PropertyService(IPropertyRepository propertyRepository, IUserRepository userRepository, IBidService bidService)
+        public PropertyService(IPropertyRepository propertyRepository, IUserRepository userRepository)
         {
             this.propertyRepository = propertyRepository;
             _userRepository = userRepository;
-            this.bidService = bidService;
         }
 
         public void create(CreatePropertyRequest request)
@@ -23,40 +21,24 @@ namespace service
 
             // check start date, end date
 
-            Property property = new Property
-            {
-                Title = request.Title,
-                Description = request.Description,
-                Address = request.Address,
-                StartDate = request.StartDate,
-                EndDate = request.EndDate,
-                StartingPrice = request.StartingPrice,
-                StepPrice = request.StepPrice,
+            Property property = new Property();
+            property.Title = request.Title;
+            property.Description = request.Description;
+            property.Address = request.Address;
+            property.StartDate = request.StartDate;
+            property.EndDate = request.EndDate;
+            property.StartingPrice = request.StartingPrice;
+            property.StepPrice = request.StepPrice;
 
-                Status = 1,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = null,
+            property.Status = 2;
+            property.CreatedAt = DateTime.Now;
+            property.UpdatedAt = null;
 
-                SellerId = currentUserId()
-            };
-            var files = request.Files.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var file in files)
-            {
-                property.PropertyFiles.Add(new PropertyFile
-                {
-                    File = file,
-                    CreatedAt = DateTime.Now,
-                });
-            }
-            var images = request.Images.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var image in images)
-            {
-                property.PropertyImages.Add(new PropertyImage
-                {
-                    Image = image,
-                });
-            }
+            property.SellerId = currentUserId();
+
             propertyRepository.create(property);
+
+
         }
 
         public void update()
@@ -142,7 +124,7 @@ namespace service
 
         public void updatePrice(UpdatePricePropertyRequest request)
         {
-            int userId = currentUserId();
+            int useId = currentUserId();
 
             if (request == null || request.Id <= 0 || request.Price <= 0)
             {
@@ -160,24 +142,16 @@ namespace service
                 return;
             }
 
-            property.CurrentWinner = userId;
+            property.CurrentWinner = useId;
             property.StartingPrice = request.Price;
             property.UpdatedAt = DateTime.Now;
 
             propertyRepository.update(property);
-
-            //create bid
-            bidService.PlaceBidAsync(userId, property.Id, request.Price);
         }
 
         public Property get(int id)
         {
             return propertyRepository.get(id);
-        }
-
-        public IQueryable<Property> GetPropertyWithBids(int propertyId)
-        {
-            return propertyRepository.GetPropertyWithBids(propertyId);
         }
 
         public IEnumerable<Property> get()
@@ -202,13 +176,12 @@ namespace service
 
         public IQueryable<Property> GetFinishedPropertiesByUser(int userId)
         {
-            return propertyRepository.GetFinishedPropertiesByUser(userId);
+            return propertyRepository.GetPropertiesByUser(userId);
         }
 
         public IQueryable<Property> GetPropertiesByUser(int userId)
         {
             return propertyRepository.GetPropertiesByUser(userId);
         }
-
     }
 }
