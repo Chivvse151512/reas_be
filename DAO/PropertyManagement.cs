@@ -1,11 +1,6 @@
 ﻿using BusinessObject;
+using BusinessObject.DTO;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAO
 {
@@ -15,13 +10,14 @@ namespace DAO
         private static PropertyManagement? instance = null;
         public static PropertyManagement Instance
         {
-            get {
+            get
+            {
                 if (instance == null)
                 {
                     instance = new PropertyManagement();
                 }
 
-                return instance; 
+                return instance;
             }
         }
 
@@ -45,7 +41,10 @@ namespace DAO
 
         public IEnumerable<Property> get()
         {
-            return context.Properties.ToList();
+            return context.Properties.Include(p => p.PropertyFiles)
+                                     .Include(i => i.PropertyImages)
+                                     .Include(b => b.Bids)
+                                     .ToList();
         }
         public Property get(int id)
         {
@@ -67,7 +66,7 @@ namespace DAO
 
             return true;
         }
-        public bool delete(Property property) 
+        public bool delete(Property property)
         {
             property.Status = 0;
             context.Properties.Update(property);
@@ -75,10 +74,11 @@ namespace DAO
 
             return true;
         }
-
-        public IQueryable<Property> GetPropertiesByStatus(int status) // dùng cho 1,3 và 4
+        public IQueryable<Property> GetPropertiesByStatus(int status)
         {
-            return context.Properties.Where(p => p.Status == status);
+            return context.Properties.Where(p => p.Status == status)
+                                     .Include(i => i.PropertyImages)
+                                     .Include(f => f.PropertyFiles);
         }
         public IQueryable<Property> GetPropertiesToVerify(int staffId)
         {
@@ -91,6 +91,12 @@ namespace DAO
         public IQueryable<Property> GetPropertiesByUser(int userId)
         {
             return context.Properties.Where(p => p.SellerId == userId);
+        }
+        public IQueryable<Property> GetPropertyWithBids(int propertyId)
+        {
+            return context.Properties.Where(p => p.Id == propertyId)
+                                     .Include(p => p.Bids)
+                                     .Include(i => i.PropertyImages);
         }
     }
 }

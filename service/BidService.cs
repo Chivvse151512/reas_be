@@ -1,4 +1,5 @@
-﻿using BusinessObject;
+﻿using System.Security.Cryptography;
+using BusinessObject;
 using Microsoft.Extensions.Logging;
 using repository;
 
@@ -15,16 +16,16 @@ namespace service
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public Bid? Create(Bid bid)
-        {
-            return ExecuteWithErrorHandling(() => _bidRepository.Create(bid),
-                "An error occurred while creating a new bid.");
-        }
-
         public IQueryable<Bid>? GetListByPropertyId(int id, int pageNumber, int pageSize)
         {
             return ExecuteWithErrorHandling(() => _bidRepository.GetListByPropertyId(id, pageNumber, pageSize),
                 "An error occurred while retrieving all bids by propertyId.");
+        }
+
+        public Task<bool> PlaceBidAsync(int userId, int propertyId, decimal amount)
+        {
+            return ExecuteWithErrorHandling(() => _bidRepository.PlaceBidAsync(userId, propertyId, amount),
+                "An error occurred while creating a new bid.");
         }
 
         private T ExecuteWithErrorHandling<T>(Func<T> func, string errorMessage)
