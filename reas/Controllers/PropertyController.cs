@@ -1,4 +1,5 @@
-﻿using BusinessObject;
+﻿using System.Security.Claims;
+using BusinessObject;
 using BusinessObject.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
@@ -99,11 +100,21 @@ namespace reas.Controllers
 
         [HttpGet("to-verify/{staffId}")]
         [EnableQuery]
-        public IActionResult GetPropertiesToVerify(int staffId)
+        public IActionResult GetPropertiesToVerify()
         {
             try
             {
-                var properties = propertyService.GetPropertiesToVerify(staffId);
+                var staffId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var role = HttpContext.User.FindFirst(ClaimTypes.Role)?.Value;
+                if (staffId == null || role == null)
+                {
+                    return Unauthorized();
+                }
+                if (role != "STAFF")
+                {
+                    return Forbid(); 
+                }
+                var properties = propertyService.GetPropertiesToVerify(int.Parse(staffId));
                 return Ok(properties);
             }
             catch (Exception ex)
@@ -114,11 +125,21 @@ namespace reas.Controllers
 
         [HttpGet("finished/{userId}")]
         [EnableQuery]
-        public IActionResult GetFinishedPropertiesByUser(int userId)
+        public IActionResult GetFinishedPropertiesByUser()
         {
             try
             {
-                var properties = propertyService.GetFinishedPropertiesByUser(userId);
+                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var role = HttpContext.User.FindFirst(ClaimTypes.Role)?.Value;
+                if (userId == null || role == null)
+                {
+                    return Unauthorized();
+                }
+                if (role != "USER")
+                {
+                    return Forbid();
+                }
+                var properties = propertyService.GetFinishedPropertiesByUser(int.Parse(userId));
                 return Ok(properties);
             }
             catch (Exception ex)
@@ -129,11 +150,21 @@ namespace reas.Controllers
 
         [HttpGet("by-user/{userId}")]
         [EnableQuery]
-        public IActionResult GetPropertiesByUser(int userId)
+        public IActionResult GetPropertiesByUser()
         {
             try
             {
-                var properties = propertyService.GetPropertiesByUser(userId);
+                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var role = HttpContext.User.FindFirst(ClaimTypes.Role)?.Value;
+                if (userId == null || role == null)
+                {
+                    return Unauthorized();
+                }
+                if (role != "USER")
+                {
+                    return Forbid();
+                }
+                var properties = propertyService.GetPropertiesByUser(int.Parse(userId));
                 return Ok(properties);
             }
             catch (Exception ex)
@@ -170,7 +201,7 @@ namespace reas.Controllers
         {
             try
             {
-                var properties = propertyService.GetPropertiesByStatus(statusId).ToList();
+                var properties = propertyService.GetPropertiesByStatus(statusId);
                 return Ok(properties);
             }
             catch (Exception ex)

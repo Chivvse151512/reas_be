@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.OData;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using reas.Helpers;
@@ -54,6 +53,8 @@ builder.Services.AddScoped<IBidService, BidService>();
 builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
 builder.Services.AddScoped<IDepositRepository, DepositRepository>();
 builder.Services.AddScoped<IBidRepository, BidRepository>();
+builder.Services.AddScoped<INewsRepository, NewsRepository>()
+				.AddScoped<INewsService, NewsService>();
 
 
 
@@ -79,7 +80,7 @@ builder.Services
 			ValidateIssuer = true,
 			ValidateAudience = true,
 			ValidateLifetime = true, // Ki?m tra th?i gian s?ng c?a token
-			ClockSkew = TimeSpan.Zero, // Không s? d?ng token slide
+			ClockSkew = TimeSpan.Zero, // Khï¿½ng s? d?ng token slide
 			ValidAudience = configuration["JWT:ValidAudience"],
 			ValidIssuer = configuration["JWT:ValidIssuer"],
 			IssuerSigningKey = new SymmetricSecurityKey(

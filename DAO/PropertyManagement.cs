@@ -78,7 +78,9 @@ namespace DAO
         {
             return context.Properties.Where(p => p.Status == status)
                                      .Include(i => i.PropertyImages)
-                                     .Include(f => f.PropertyFiles);
+                                     .Include(f => f.PropertyFiles)
+                                     .Include(s => s.Seller)
+                                     .Include(v => v.VerifyByNavigation);
         }
         public IQueryable<Property> GetPropertiesToVerify(int staffId)
         {

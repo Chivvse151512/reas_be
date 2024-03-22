@@ -10,6 +10,5 @@ namespace BusinessObject.DTO
     {
         public int Id { get; set; }
         public int Status {  get; set; }
-
     }
 }
