@@ -80,7 +80,8 @@ namespace DAO
                                      .Include(i => i.PropertyImages)
                                      .Include(f => f.PropertyFiles)
                                      .Include(s => s.Seller)
-                                     .Include(v => v.StaffVerify);
+                                     .Include(v => v.StaffVerify)
+                                     .Include(c => c.CurrentWinner);
         }
         public IQueryable<Property> GetPropertiesToVerify(int staffId)
         {
