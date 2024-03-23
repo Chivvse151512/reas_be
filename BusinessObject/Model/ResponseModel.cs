@@ -1,4 +1,4 @@
-﻿namespace reas.Model
+﻿namespace BusinessObject.Model
 {
     public class ResponseModel
     {

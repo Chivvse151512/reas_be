@@ -1,7 +1,8 @@
 ﻿using BusinessObject;
+using BusinessObject.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
-using reas.Model;
 using service;
 
 namespace reas.Controllers
@@ -15,6 +16,7 @@ namespace reas.Controllers
             _newsService = newsService;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateNews([FromBody] NewsRequestModel newsRequest)
         {
@@ -42,6 +44,7 @@ namespace reas.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public IActionResult GetNewsById(int id)
         {
@@ -60,6 +63,7 @@ namespace reas.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> UpdateNews([FromBody] NewsUpdateRequestModel newsUpdateRequest)
         {
@@ -95,6 +99,7 @@ namespace reas.Controllers
                 return BadRequest(new ResponseModel { Status = "Error", Message = ex.Message });
             }
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNews(int id)

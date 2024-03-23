@@ -1,13 +1,6 @@
-﻿using MailKit.Net.Smtp;
+﻿using BusinessObject.Model;
 using MailKit.Security;
 using MimeKit;
-using reas.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace reas.Services
 {
