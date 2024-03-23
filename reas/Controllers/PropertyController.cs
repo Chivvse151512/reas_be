@@ -119,7 +119,7 @@ namespace reas.Controllers
             }
         }
 
-        [HttpGet("to-verify/{staffId}")]
+        [HttpGet("to-verify")]
         [EnableQuery]
         public IActionResult GetPropertiesToVerify()
         {
@@ -144,7 +144,7 @@ namespace reas.Controllers
             }
         }
 
-        [HttpGet("finished/{userId}")]
+        [HttpGet("finished")]
         [EnableQuery]
         public IActionResult GetFinishedPropertiesByUser()
         {
@@ -156,7 +156,7 @@ namespace reas.Controllers
                 {
                     return Unauthorized();
                 }
-                if (role != "USER")
+                if (role != "CUSTOMER")
                 {
                     return Forbid();
                 }
@@ -169,7 +169,7 @@ namespace reas.Controllers
             }
         }
 
-        [HttpGet("by-user/{userId}")]
+        [HttpGet("by-user")]
         [EnableQuery]
         public IActionResult GetPropertiesByUser()
         {
@@ -181,7 +181,7 @@ namespace reas.Controllers
                 {
                     return Unauthorized();
                 }
-                if (role != "USER")
+                if (role != "CUSTOMER")
                 {
                     return Forbid();
                 }
