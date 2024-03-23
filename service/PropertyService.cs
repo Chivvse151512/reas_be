@@ -162,16 +162,14 @@ namespace service
 
         private bool IsStaff(int userId)
         {
-            User user = _userRepository.Get(userId); 
-            Role userRole = RoleDao.Instance.Get(user.RoleId);
-            return userRole.Name.Equals("STAFF", StringComparison.OrdinalIgnoreCase);
+            User user = _userRepository.Get(userId);
+            return user != null && user.RoleId == 2;
         }
 
         private bool IsAdmin(int userId)
         {
-            User user = _userRepository.Get(userId); 
-            Role userRole = RoleDao.Instance.Get(user.RoleId); 
-            return userRole.Name.Equals("ADMIN", StringComparison.OrdinalIgnoreCase);
+            User user = _userRepository.Get(userId);
+            return user != null && user.RoleId == 1;
         }
 
 
