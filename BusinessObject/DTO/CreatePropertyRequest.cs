@@ -29,8 +29,8 @@ namespace BusinessObject.DTO
         [Range(0.01, double.MaxValue, ErrorMessage = "Step price must be greater than 0.")]
         public decimal StepPrice { get; set; }
 
-        public string Files { get; set; }
-        public string Images { get; set; }
+        public List<string> Files { get; set; }
+        public List<string> Images { get; set; }
     }
 
     public class DateGreaterThanAttribute : ValidationAttribute

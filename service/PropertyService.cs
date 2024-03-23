@@ -17,8 +17,12 @@ namespace service
             this.bidService = bidService;
         }
 
-        public void create(CreatePropertyRequest request)
+        public void create(int userId, CreatePropertyRequest request)
         {
+            if (request == null)
+            {
+                throw new Exception("Invalid request");
+            }
             Property property = new Property
             {
                 Title = request.Title,
@@ -28,31 +32,39 @@ namespace service
                 EndDate = request.EndDate,
                 StartingPrice = request.StartingPrice,
                 StepPrice = request.StepPrice,
-
+                CurrentPrice = request.StartingPrice,
+                
                 Status = 1,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = null,
 
-                SellerId = currentUserId()
+                SellerId = userId
             };
-            var files = request.Files.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var file in files)
+            
+            List<PropertyFile> files = new List<PropertyFile>();
+            if (request.Files != null)
             {
-                property.PropertyFiles.Add(new PropertyFile
+                foreach (var item in request.Files)
                 {
-                    File = file,
-                    CreatedAt = DateTime.Now,
-                });
+                    files.Add(new PropertyFile { File = item, CreatedAt = DateTime.Now, Status = 1});
+                }
             }
-            var images = request.Images.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var image in images)
+            
+
+            List<PropertyImage> images = new List<PropertyImage>();
+            if (request.Images != null)
             {
-                property.PropertyImages.Add(new PropertyImage
+                foreach (var item in request.Images)
                 {
-                    Image = image,
-                });
+                    images.Add(new PropertyImage { Image = item });
+                }
             }
+            property.PropertyFiles = files;
+            property.PropertyImages = images;
+            
+
             propertyRepository.create(property);
+            
         }
 
         public void update()
@@ -136,28 +148,37 @@ namespace service
         }
 
 
-        public void updatePrice(UpdatePricePropertyRequest request)
+        public void updatePrice(int userId,UpdatePricePropertyRequest request)
         {
-            int userId = currentUserId();
 
-            if (request == null || request.Id <= 0 || request.Price <= 0)
+            if (request == null || request.Id <= 0 || request.Price <= 0 || request.Price > 10_000_000_000.00m)
             {
-                return; //todo: return message error here;
+                throw new Exception("Invalid params request");
             } 
 
             Property property = propertyRepository.get(request.Id);
             if (property == null)
             {
-                return;
+                throw new Exception("Property Id is not exist");
             }
 
-            if (request.Price < property.StepPrice + property.StartingPrice) 
+            if (userId == property.SellerId)
             {
-                return;
+                throw new Exception("You can not bid your property!");
+            }
+
+            if (userId == property.CurrentWinnerId)
+            {
+                throw new Exception("You cannot bid when you are highest bid!");
+            }
+
+            if (request.Price < property.StepPrice + property.CurrentPrice)
+            {
+                throw new Exception("Bid Price must larger current price + step price");
             }
 
             property.CurrentWinnerId = userId;
-            property.StartingPrice = request.Price;
+            property.CurrentPrice = request.Price;
             property.UpdatedAt = DateTime.Now;
 
             propertyRepository.update(property);

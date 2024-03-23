@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using BusinessObject;
 using BusinessObject.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using reas.Model;
@@ -43,12 +44,19 @@ namespace reas.Controllers
         {
             try
             {
-                propertyService.create(request);
+                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (userId == null)
+                {
+                    return Unauthorized();
+                }
+
+                propertyService.create(int.Parse(userId), request);
                 return Ok(new ResponseModel { Status = "Success", Message = "Property created successfully" });
 
 
             } catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return BadRequest(new ResponseModel { Status = "Error", Message = ex.Message });
             }
         }
@@ -85,11 +93,24 @@ namespace reas.Controllers
         }
 
         [HttpPost("update-price")]
+        [Authorize]
         public IActionResult UpdateCurrentPrice(UpdatePricePropertyRequest request)
         {
             try
             {
-                propertyService.updatePrice(request);
+                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (userId == null)
+                {
+                    return Unauthorized();
+                }
+                var role = HttpContext.User.FindFirst(ClaimTypes.Role)?.Value;
+                if (role == null || role != "3")
+                {
+                    throw new Exception("Only user can be update price!");
+                }
+
+
+                propertyService.updatePrice(int.Parse(userId), request);
                 return Ok(new ResponseModel { Status = "Success", Message = "Property price updated successfully" });
             }
             catch (Exception ex)
