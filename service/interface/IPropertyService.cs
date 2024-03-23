@@ -7,7 +7,7 @@ namespace service
     {
         void create(CreatePropertyRequest request);
         void update();
-        void updateStatus(UpdateStatusPropertyRequest request);
+        void updateStatus(UpdateStatusPropertyRequest request, int userId);
         void updatePrice(UpdatePricePropertyRequest request);
         Property get(int id);
         IQueryable<Property> GetPropertyWithBids(int propertyId);

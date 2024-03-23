@@ -1,11 +1,9 @@
-﻿using System;
-using System.Data.Common;
+﻿using System.Data.Common;
 using BusinessObject;
-using Microsoft.EntityFrameworkCore;
 
 namespace DAO
 {
-	public class BidDao
+    public class BidDao
 	{
         private readonly ReasContext? context;
         private static BidDao? instance = null;
@@ -55,21 +53,12 @@ namespace DAO
             }
         }
 
-        public async Task<bool> PlaceBidAsync(int userId, int propertyId, decimal amount)
+        public async Task<bool> PlaceBidAsync(Bid bid)
         {
             if (context == null)
             {
                 throw new InvalidOperationException("Database context is not initialized.");
             }
-
-            var bid = new Bid
-            {
-                UserId = userId,
-                PropertyId = propertyId,
-                Amount = amount,
-                Status = 1, 
-                CreatedAt = DateTime.UtcNow
-            };
 
             context.Bids.Add(bid);
             await context.SaveChangesAsync();
