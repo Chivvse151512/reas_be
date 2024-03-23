@@ -1,10 +1,10 @@
 ﻿using System.Security.Claims;
 using BusinessObject;
 using BusinessObject.DTO;
+using BusinessObject.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
-using reas.Model;
 using service;
 
 namespace reas.Controllers
@@ -25,6 +25,7 @@ namespace reas.Controllers
 
 
         [HttpGet]
+        [Authorize]
         [EnableQuery]
         public IActionResult Get()
         {
@@ -39,6 +40,7 @@ namespace reas.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost("create")]
         public IActionResult create([FromBody] CreatePropertyRequest request)
         {
@@ -61,25 +63,24 @@ namespace reas.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost("update-property")]
         public IActionResult update()
         {
             return null;
         }
 
+        [Authorize]
         [HttpPost("update-status")]
         public IActionResult UpdateStatus([FromBody] UpdateStatusPropertyRequest request)
         {
             try
             {
-                // Lấy userId từ claim trong token
                 var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
                 if (userIdClaim == null)
                 {
                     return Unauthorized("User ID not found in token.");
                 }
-
-                // Chuyển đổi userId từ string sang int
                 if (!int.TryParse(userIdClaim.Value, out int userId))
                 {
                     return BadRequest("Invalid user ID.");
@@ -104,6 +105,7 @@ namespace reas.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost("update-price")]
         [Authorize]
         public IActionResult UpdateCurrentPrice(UpdatePricePropertyRequest request)
@@ -131,6 +133,7 @@ namespace reas.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("to-verify")]
         [EnableQuery]
         public IActionResult GetPropertiesToVerify()
@@ -143,10 +146,11 @@ namespace reas.Controllers
                 {
                     return Unauthorized();
                 }
-                if (role != "STAFF")
+                if (role != "2")
                 {
                     return Forbid(); 
                 }
+
                 var properties = propertyService.GetPropertiesToVerify(int.Parse(staffId));
                 return Ok(properties);
             }
@@ -156,6 +160,7 @@ namespace reas.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("finished")]
         [EnableQuery]
         public IActionResult GetFinishedPropertiesByUser()
@@ -168,7 +173,7 @@ namespace reas.Controllers
                 {
                     return Unauthorized();
                 }
-                if (role != "CUSTOMER")
+                if (role != "3")
                 {
                     return Forbid();
                 }
@@ -181,6 +186,7 @@ namespace reas.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("by-user")]
         [EnableQuery]
         public IActionResult GetPropertiesByUser()
@@ -193,7 +199,7 @@ namespace reas.Controllers
                 {
                     return Unauthorized();
                 }
-                if (role != "CUSTOMER")
+                if (role != "3")
                 {
                     return Forbid();
                 }
@@ -206,6 +212,7 @@ namespace reas.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("{propertyId}")]
         public IActionResult GetPropertiesWithBids(int propertyId)
         {
@@ -228,6 +235,7 @@ namespace reas.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("by-status")]
         [EnableQuery]
         public IActionResult GetPropertiesByStatus(int statusId)

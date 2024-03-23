@@ -1,5 +1,5 @@
 ﻿using System;
-namespace reas.Model
+namespace BusinessObject.Model
 {
 	public class NewsUpdateRequestModel
 	{

@@ -1,13 +1,11 @@
 ﻿using BusinessObject;
+using BusinessObject.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
-using Org.BouncyCastle.Utilities;
 using reas.Helpers;
-using reas.Model;
 using reas.Services;
 using service;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace reas.Controllers
@@ -17,19 +15,16 @@ namespace reas.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IConfiguration _configuration;
         private readonly IEMailSenderService _eMailSenderService;
         private readonly ITokenService _tokenService;
 
         public UserController(
             IUserService userService,
-            IConfiguration configuration,
             IEMailSenderService eMailSenderService,
             ITokenService tokenService
          )
         {
             _userService = userService;
-            _configuration = configuration;
             _eMailSenderService = eMailSenderService;
             _tokenService = tokenService;
         }

@@ -1,8 +1,7 @@
-﻿using BusinessObject;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using service;
-using reas.Model;
 using Microsoft.AspNetCore.OData.Query;
+using BusinessObject.Model;
 
 namespace reas.Controllers
 {

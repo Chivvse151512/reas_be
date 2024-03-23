@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace reas.Model
+namespace BusinessObject.Model
 {
 	public class CreateDepositModel
 	{	
