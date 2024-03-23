@@ -5,10 +5,10 @@ namespace service
 {
     public interface IPropertyService
     {
-        void create(CreatePropertyRequest request);
+        void create(int userId,CreatePropertyRequest request);
         void update();
         void updateStatus(UpdateStatusPropertyRequest request, int userId);
-        void updatePrice(UpdatePricePropertyRequest request);
+        void updatePrice(int userId, UpdatePricePropertyRequest request);
         Property get(int id);
         IQueryable<Property> GetPropertyWithBids(int propertyId);
         IEnumerable<Property> get();
