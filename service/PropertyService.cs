@@ -167,10 +167,13 @@ namespace service
                 throw new Exception("You can not bid your property!");
             }
 
-            if (userId == property.CurrentWinnerId)
-            {
-                throw new Exception("You cannot bid when you are highest bid!");
-            }
+
+            //check is in time bid
+
+            //if (userId == property.CurrentWinnerId)
+            //{
+            //    throw new Exception("You cannot bid when you are highest bid!");
+            //}
 
             if (request.Price < property.StepPrice + property.CurrentPrice)
             {
