@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using BusinessObject;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using repository;
 
@@ -22,9 +23,19 @@ namespace service
                 "An error occurred while retrieving all bids by propertyId.");
         }
 
-        public Task<bool> PlaceBidAsync(int userId, int propertyId, decimal amount)
+        public async Task<bool> PlaceBidAsync(int userId, int propertyId, decimal amount)
         {
-            return ExecuteWithErrorHandling(() => _bidRepository.PlaceBidAsync(userId, propertyId, amount),
+            var bid = new Bid
+            {
+                UserId = userId,
+                PropertyId = propertyId,
+                Amount = amount,
+                Status = 1,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            return await ExecuteWithErrorHandling(async () =>
+                await _bidRepository.PlaceBidAsync(bid),
                 "An error occurred while creating a new bid.");
         }
 

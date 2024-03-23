@@ -1,9 +1,9 @@
+using BusinessObject.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.OData;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using reas.Helpers;
-using reas.Model;
 using reas.Services;
 using repository;
 using service;

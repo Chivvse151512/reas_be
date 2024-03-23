@@ -1,9 +1,7 @@
-﻿namespace reas.Model
+﻿namespace BusinessObject.Model
 {
-    public class UserSignUpRequestModel
+    public class UserUpdateProfileRequestModel
     {
-        public string UserName { get; set; } = null!;
-        public string Password { get; set; } = null!;
         public string Email { get; set; } = null!;
         public string FullName { get; set; } = null!;
         public string? Address { get; set; }
