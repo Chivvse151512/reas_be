@@ -104,12 +104,10 @@ namespace reas.Controllers
                 });
             }
 
-            var role = _userService.GetRole(user);
-
             var authClaims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Role, role.Name)
+                new Claim(ClaimTypes.Role, user.RoleId.ToString())
             };
 
             var accessToken = _tokenService.GenerateAccessToken(authClaims);

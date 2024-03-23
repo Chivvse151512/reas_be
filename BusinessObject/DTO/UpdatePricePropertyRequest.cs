@@ -9,6 +9,6 @@ namespace BusinessObject.DTO
     public class UpdatePricePropertyRequest
     {
         public int Id { get; set; }
-        public int Price { get; set; }
+        public decimal Price { get; set; }
     }
 }
