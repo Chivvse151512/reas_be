@@ -2,6 +2,7 @@
 using service;
 using Microsoft.AspNetCore.OData.Query;
 using BusinessObject.Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace reas.Controllers
 {
@@ -17,6 +18,7 @@ namespace reas.Controllers
         }
 
         // POST api/bid
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> PlaceBid([FromBody] CreateBidRequestModel model)
         {
@@ -48,6 +50,7 @@ namespace reas.Controllers
         }
 
         [EnableQuery]
+        [Authorize]
         [HttpGet("property/{id}")]
         public ActionResult GetBidsByPropertyId(int id, int pageNumber, int pageSize)
         {

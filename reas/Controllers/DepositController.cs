@@ -1,5 +1,6 @@
 ﻿using BusinessObject;
 using BusinessObject.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using service;
@@ -18,6 +19,7 @@ namespace reas.Controllers
         }
 
         // GET api/deposit
+        [Authorize]
         [HttpGet]
         [EnableQuery]
         public ActionResult<IList<Deposit>> GetAllDeposits()
@@ -40,6 +42,7 @@ namespace reas.Controllers
         }
 
         // GET api/deposit/{id}
+        [Authorize]
         [HttpGet("{id}")]
         public ActionResult<Deposit> GetDepositById(int id)
         {
@@ -61,6 +64,7 @@ namespace reas.Controllers
         }
 
         // POST api/deposit
+        [Authorize]
         [HttpPost]
         public IActionResult CreateDeposit([FromBody] CreateDepositModel model)
         {
@@ -87,6 +91,7 @@ namespace reas.Controllers
         }
 
         // PUT api/deposit/{id}/updatestatus
+        [Authorize]
         [HttpPut("{id}/updatestatus")]
         public IActionResult UpdateDepositStatus(int id, [FromBody] UpdateDepositStatusModel model)
         {
@@ -118,6 +123,7 @@ namespace reas.Controllers
         }
 
         // GET api/deposit/check
+        [Authorize]
         [HttpGet("check")]
         public ActionResult CheckDeposit([FromQuery] CheckDepositModel model)
         {

@@ -100,7 +100,7 @@ namespace reas.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNews(int id)
         {
@@ -115,6 +115,7 @@ namespace reas.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [EnableQuery]
         public IActionResult GetAllNews()
