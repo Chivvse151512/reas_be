@@ -9,7 +9,7 @@ using service;
 
 namespace reas.Controllers
 {
-    [Route("api/property")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PropertyController : ControllerBase
     {
@@ -72,7 +72,19 @@ namespace reas.Controllers
         {
             try
             {
-                propertyService.updateStatus(request);
+                // Lấy userId từ claim trong token
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userIdClaim == null)
+                {
+                    return Unauthorized("User ID not found in token.");
+                }
+
+                // Chuyển đổi userId từ string sang int
+                if (!int.TryParse(userIdClaim.Value, out int userId))
+                {
+                    return BadRequest("Invalid user ID.");
+                }
+                propertyService.updateStatus(request, userId);
                 return Ok(new ResponseModel { Status = "Success", Message = "Property status updated successfully" });
             }
             catch (ArgumentException ex)

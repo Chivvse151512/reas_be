@@ -12,6 +12,6 @@ namespace repository
     {
         public IQueryable<Bid>? GetListByPropertyId(int id, int pageNumber, int pageSize) => BidDao.Instance.GetListByPropertyId(id, pageNumber, pageSize);
 
-        public Task<bool> PlaceBidAsync(int userId, int propertyId, decimal amount) => BidDao.Instance.PlaceBidAsync(userId, propertyId, amount);
+        public Task<bool> PlaceBidAsync(Bid bid) => BidDao.Instance.PlaceBidAsync(bid);
     }
 }
