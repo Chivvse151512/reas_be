@@ -25,6 +25,13 @@ namespace service
             {
                 throw new Exception("Invalid request");
             }
+
+            var now  = DateTime.Now.AddDays(1);
+            if (now > request.EndDate || now > request.StartDate || request.EndDate < request.StartDate)
+            {
+                throw new Exception("Invalid start date or end date");
+            }
+
             Property property = new Property
             {
                 Title = request.Title,
@@ -136,7 +143,7 @@ namespace service
                         break;
                     case 6:
                         // Cho phép staff đổi trạng thái từ 2 sang 6, hoặc admin đổi từ 4 sang 6
-                        if ((isStaff && property.Status == 2) || (isAdmin && property.Status == 4))
+                        if ((isStaff && property.Status == 2) || (isAdmin && property.Status == 3))
                         {
                             property.Status = status;
                         }
@@ -192,6 +199,12 @@ namespace service
                 throw new Exception("You can not bid your property!");
             }
 
+            var now = DateTime.Now;
+            if (property.StartDate > now || property.EndDate < now)
+            {
+                throw new Exception("The Auction is not Running!");
+            }
+
 
             //check is in time bid
 
@@ -230,10 +243,6 @@ namespace service
             return propertyRepository.get();
         }
 
-        private int currentUserId()
-        {
-            return 1;
-        }
 
         public IQueryable<dynamic> GetPropertiesByStatus(int status)
         {
@@ -250,6 +259,7 @@ namespace service
                     p.EndDate,
                     p.StartingPrice,
                     p.StepPrice,
+                    p.CurrentPrice,
                     p.Status,
                     p.CreatedAt,
                     p.UpdatedAt,
