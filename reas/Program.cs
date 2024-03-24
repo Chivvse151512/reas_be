@@ -55,6 +55,14 @@ builder.Services.AddScoped<IDepositRepository, DepositRepository>();
 builder.Services.AddScoped<IBidRepository, BidRepository>();
 builder.Services.AddScoped<INewsRepository, NewsRepository>()
 				.AddScoped<INewsService, NewsService>();
+builder
+   .Services
+   .AddScoped<ITokenService, TokenService>()
+   .AddScoped<IUserRepository, UserRepository>()
+   .AddScoped<IUserService, UserService>()
+   .AddScoped<IRoleRepository, RoleRepository>()
+   .AddScoped<IRoleService, RoleService>();
+
 
 
 
