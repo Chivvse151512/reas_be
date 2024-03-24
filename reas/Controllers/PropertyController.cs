@@ -9,7 +9,7 @@ using service;
 
 namespace reas.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/property")]
     [ApiController]
     public class PropertyController : ControllerBase
     {
@@ -221,7 +221,7 @@ namespace reas.Controllers
                 var propertyWithBids = propertyService.GetPropertyWithBids(propertyId).ToList();
                 if (propertyWithBids != null)
                 {
-                    return Ok(propertyWithBids);
+                    return Ok(propertyWithBids[0]);
                 }
                 else
                 {
@@ -235,7 +235,6 @@ namespace reas.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet("by-status")]
         [EnableQuery]
         public IActionResult GetPropertiesByStatus(int statusId)

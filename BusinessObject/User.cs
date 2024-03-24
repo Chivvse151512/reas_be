@@ -1,4 +1,6 @@
-﻿namespace BusinessObject
+﻿using System.Text.Json.Serialization;
+
+namespace BusinessObject
 {
     public partial class User
     {
@@ -28,13 +30,21 @@
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
 
+        [JsonIgnore]
         public virtual Role Role { get; set; } = null!;
+        [JsonIgnore]
         public virtual ICollection<Bid> Bids { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Property> PropertyCurrentWinners { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Property> PropertySellers { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Property> PropertyStaffVerifies { get; set; }
+        [JsonIgnore]
         public virtual ICollection<PropertyTransaction> PropertyTransactionBuyers { get; set; }
+        [JsonIgnore]
         public virtual ICollection<PropertyTransaction> PropertyTransactionSellers { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }
