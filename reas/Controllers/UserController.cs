@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using reas.Helpers;
-using reas.Model;
+using BusinessObject.Model;
 using reas.Services;
 using service;
 using System.IdentityModel.Tokens.Jwt;
@@ -69,6 +69,11 @@ namespace reas.Controllers
 		[Route("login")]
 		public IActionResult Login([FromBody] LoginRequestModel model)
 		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			var user = _userService.FindByUserName(model.UserName);
 
 			if (user == null
@@ -256,10 +261,13 @@ namespace reas.Controllers
 		}
 
 		[HttpPost]
-		[Authorize]
+		[Authorize(Roles = "ADMIN,STAFF,CUSTOMER")]
 		[Route("update-profile/{userId}")]
 		public IActionResult UpdateProfile(int userId, [FromBody] UserUpdateProfileRequestModel model)
 		{
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
 			var user = _userService.Get(userId);
 
 			if (user == null)
@@ -294,10 +302,24 @@ namespace reas.Controllers
 		}
 
 		[HttpPost]
-		[Authorize]
+		[Authorize(Roles = "ADMIN")]
 		[Route("ban/{userId}")]
 		public IActionResult BanUser(int userId)
 		{
+			string currentUsername = User.Identity?.Name ?? string.Empty;
+
+			if (string.IsNullOrEmpty(currentUsername))
+				return BadRequest("Can't get user identity name");
+
+			var user = _userService.FindByUserName(currentUsername);
+
+			// is current login user
+
+			if (user.Id == userId)
+			{
+				return BadRequest("Can't ban current login user !");
+			}
+
 			var result = _userService.Ban(userId);
 
 			if (!result)
@@ -311,14 +333,13 @@ namespace reas.Controllers
 
 			return Ok(new ResponseModel
 			{
-				Status = "Success"
-				,
+				Status = "Success",
 				Message = "User ban successfully!"
 			});
 		}
 
 		[HttpPost]
-		[Authorize]
+		[Authorize(Roles = "ADMIN")]
 		[Route("delete/{userId}")]
 		public IActionResult Delete(int userId)
 		{

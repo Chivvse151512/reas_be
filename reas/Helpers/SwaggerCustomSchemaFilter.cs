@@ -1,6 +1,8 @@
-﻿using BusinessObject.Model;
+﻿
+using BusinessObject.Model;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
+using BusinessObject.Model;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace reas.Helpers
