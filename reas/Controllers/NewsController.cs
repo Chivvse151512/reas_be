@@ -70,10 +70,6 @@ namespace reas.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(new ResponseModel { Status = "Error", Message = "Validation failed.", Data = ModelState });
-                }
                 var existingNews = _newsService.GetNewsById(newsUpdateRequest.Id);
                 if (existingNews == null)
                 {
@@ -91,7 +87,6 @@ namespace reas.Controllers
 
                 existingNews.LastUpdated = DateTime.Now;
 
-                // Save changes to the database
                 await _newsService.UpdateNewsAsync(existingNews);
                 return Ok(new ResponseModel { Status = "Success", Message = "News updated successfully." });
             }
