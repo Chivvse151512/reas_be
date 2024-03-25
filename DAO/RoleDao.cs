@@ -76,5 +76,13 @@ namespace DAO
 
 			return false;
 		}
+
+		public Role GetByName(string name)
+		{
+			return context
+				.Roles
+				.Where(x => x.Name == name)
+				.FirstOrDefault();
+		}
 	}
 }
