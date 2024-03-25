@@ -85,7 +85,7 @@ namespace DAO
         }
         public IQueryable<Property> GetPropertiesToVerify(int staffId)
         {
-            return context.Properties.Where(p => p.Status == 2 && p.StaffVerifyId == staffId);
+            return context.Properties.Where(p => p.Status == 2 && p.StaffVerifyId == staffId).Include(i => i.PropertyImages);
         }
         public IQueryable<Property> GetFinishedPropertiesByUser(int userId)
         {
@@ -93,12 +93,12 @@ namespace DAO
         }
         public IQueryable<Property> GetPropertiesByUser(int userId)
         {
-            return context.Properties.Where(p => p.SellerId == userId);
+            return context.Properties.Where(p => p.SellerId == userId).Include(i => i.PropertyImages);
         }
         public IQueryable<Property> GetPropertyWithBids(int propertyId)
         {
             return context.Properties.Where(p => p.Id == propertyId)
-                                     .Include(p => p.Bids)
+                                     .Include(p => p.Bids).ThenInclude(b => b.User)
                                      .Include(i => i.PropertyImages);
         }
     }

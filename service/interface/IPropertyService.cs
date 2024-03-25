@@ -10,7 +10,7 @@ namespace service
         void updateStatus(UpdateStatusPropertyRequest request, int userId);
         void updatePrice(int userId, UpdatePricePropertyRequest request);
         Property get(int id);
-        IQueryable<Property> GetPropertyWithBids(int propertyId);
+        IQueryable<dynamic> GetPropertyWithBids(int propertyId);
         IEnumerable<Property> get();
         IQueryable<dynamic> GetPropertiesByStatus(int status);
         IQueryable<Property> GetPropertiesToVerify(int staffId);

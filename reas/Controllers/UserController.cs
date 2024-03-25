@@ -145,7 +145,7 @@ namespace reas.Controllers
                 Address = model.Address,
                 Phone = model.Phone,
                 Avatar = model.Avatar,
-                RoleId = 2, // USER
+                RoleId = 3, // USER
                 Status = 1, // Active
                 CreatedAt = DateTime.UtcNow,
             };

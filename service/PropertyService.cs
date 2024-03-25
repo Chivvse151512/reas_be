@@ -26,7 +26,7 @@ namespace service
                 throw new Exception("Invalid request");
             }
 
-            var now  = DateTime.Now.AddDays(1);
+            var now  = DateTime.Now;
             if (now > request.EndDate || now > request.StartDate || request.EndDate < request.StartDate)
             {
                 throw new Exception("Invalid start date or end date");
@@ -233,9 +233,27 @@ namespace service
             return propertyRepository.get(id);
         }
 
-        public IQueryable<Property> GetPropertyWithBids(int propertyId)
+        public IQueryable<dynamic> GetPropertyWithBids(int propertyId)
         {
-            return propertyRepository.GetPropertyWithBids(propertyId);
+            return propertyRepository.GetPropertyWithBids(propertyId).Select(p => new
+            {
+                p.Id,
+                p.Title,
+                p.Description,
+                p.Bids,
+                Winner = p.CurrentWinner,
+                p.Address,
+                p.StartDate,
+                p.EndDate,
+                p.StartingPrice,
+                p.StepPrice,
+                p.CurrentPrice,
+                p.Status,
+                StaffVerifyId = p.StaffVerify.FullName,
+                p.Note,
+                Files = p.PropertyFiles.Select(pf => pf.File),
+                Images = p.PropertyImages.Select(pi => pi.Image)
+            }); ;
         }
 
         public IEnumerable<Property> get()
